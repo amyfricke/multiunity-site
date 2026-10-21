@@ -1,8 +1,6 @@
 ---
-title: MultiUnity
+layout: home
 ---
-
-# MultiUnity
 
 **A personal health tracker that turns what you record into clear summaries you can bring to your clinician.**
 
