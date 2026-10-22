@@ -29,3 +29,5 @@ MultiUnity is in private testing and will be available on the App Store and Goog
 ## Contact
 
 [info@multiunity-app.com](mailto:info@multiunity-app.com)
+
+[Privacy Policy (draft)](/privacy/)
