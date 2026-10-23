@@ -859,7 +859,7 @@ html>body{padding:0}</style>
     <button class="btn" type="button" role="tab" aria-selected="false" aria-controls="mu-product" data-mu-tab="product">Product</button>
     <button class="btn" type="button" role="tab" aria-selected="false" aria-controls="mu-business" data-mu-tab="business">Business</button>
     <button class="btn" type="button" role="tab" aria-selected="false" aria-controls="mu-terms" data-mu-tab="terms">Terms of Use</button>
-    <a class="btn" href="/privacy/">Privacy Policy</a>
+    <button class="btn" type="button" role="tab" aria-selected="false" aria-controls="mu-privacy" data-mu-tab="privacy">Privacy Policy</button>
   </nav>
 
   <section class="mu-panel" id="mu-overview" role="tabpanel" data-mu-panel="overview">
@@ -1066,7 +1066,7 @@ html>body{padding:0}</style>
       <ul class="mu-list">
         <li>License to operate. You grant us a limited license to store, process, and transmit Your Content only as needed to run the App. That includes sending it to the service providers listed in Section 6 to generate estimates and summaries.</li>
         <li>Accuracy is yours. You are responsible for the accuracy and completeness of what you enter. Estimates and summaries depend on it.</li>
-        <li>Privacy. How we collect, use, and protect your information is described in our Privacy Policy at https://multiunity-app.com/privacy/. Health information is sensitive, so only enter what you are comfortable storing.</li>
+        <li>Privacy. How we collect, use, and protect your information is described in our Privacy Policy at <a href="/#privacy">https://multiunity-app.com/#privacy</a>. Health information is sensitive, so only enter what you are comfortable storing.</li>
         <li>Backups. We do not guarantee that Your Content will never be lost or corrupted. Export or keep copies of anything important.</li>
       </ul>
     </section>
@@ -1121,6 +1121,116 @@ html>body{padding:0}</style>
     </section>
   </section>
 
+  <section class="mu-panel" id="mu-privacy" role="tabpanel" data-mu-panel="privacy" hidden>
+    <section class="card">
+      <h2>Privacy Policy</h2>
+      <p><strong>Draft pending legal review.</strong> It describes how MultiUnity works today and may change before it takes effect.</p>
+      <p>Draft dated October 22, 2026.</p>
+      <p>This Privacy Policy explains how MultiUnity ("we," "us") handles information in the MultiUnity app (the "App").</p>
+    </section>
+    <section>
+      <h2>Summary</h2>
+      <ul class="mu-list">
+        <li>What we collect: your account details and the health information you choose to record: symptoms, mood, food and drinks, medications and other interventions, vitals, observations, questionnaire answers, goals, and medical conditions.</li>
+        <li>Why: to show your history, charts, summaries, nutrition estimates, reminders, and safety notices. Nothing else.</li>
+        <li>AI processing: entries needed for a summary or estimate are sent to our AI service providers to generate it, with your consent.</li>
+        <li>What we never do: sell your information, use it for advertising, or share it with data brokers.</li>
+        <li>Your control: you can download your data or permanently delete your account at any time in Settings.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>1. Information we collect</h2>
+      <p>We collect only what you give us and what the App needs to work.</p>
+      <ul class="mu-list">
+        <li>Account information: email address, username, first name, reason for joining, and password (stored only as a secure hash by our authentication provider). From you, at sign-up.</li>
+        <li>Health information you record: symptom ratings and notes, mood ratings, food and drink entries, medications, supplements and other interventions with doses and times, vitals, bowel movements, observations, PHQ-9 and GAD-7 answers and scores, and goals. From you, when you make an entry.</li>
+        <li>Personal details: gender at birth, date of birth, gender identity, medical conditions, and optional demographics. From you, in Personal details (optional).</li>
+        <li>Information the App derives: nutrition estimates, daily nutrition totals, summaries and keywords, suggested symptoms, and chart data. Generated from your entries.</li>
+        <li>Consent and settings: which consents you gave and when, and your reminder and display settings.</li>
+        <li>Technical information: sign-in session tokens, and request counts used for rate limits.</li>
+      </ul>
+      <p>What we do not collect: your location, contacts, photos, advertising identifiers, or browsing activity outside the App. The App does not currently use third-party analytics or advertising tools.</p>
+      <p>Voice dictation: when you tap a microphone, your speech is converted to text by your device's speech recognition (on the device where supported, otherwise by Apple's or Google's speech service under their terms). We receive only the resulting text, and only if you save it.</p>
+    </section>
+    <section>
+      <h2>2. How we use your information</h2>
+      <p>We use your information only to provide the App to you:</p>
+      <ul class="mu-list">
+        <li>Store your entries and show them in your history, Entries by date, charts, and pie charts.</li>
+        <li>Generate summaries, keywords, suggested questions for your clinician, and nutrition estimates.</li>
+        <li>Suggest symptoms and mood measures to track based on the medical conditions you enter.</li>
+        <li>Show safety notices with crisis and emergency resources when an entry describes a possible emergency. The App does not monitor entries, contact anyone, or alert emergency services.</li>
+        <li>Send the reminders you turn on. Reminders are scheduled on your device, and their lock-screen text does not name medications or conditions.</li>
+        <li>Keep the App secure: authenticate you, prevent abuse, and limit how often AI features can be called.</li>
+        <li>Respond to your requests and support questions.</li>
+      </ul>
+      <p>We do not use your information for advertising, marketing profiles, or to train our own or anyone else's AI models. We do not make decisions about you that produce legal or similarly significant effects.</p>
+    </section>
+    <section>
+      <h2>3. AI processing and service providers</h2>
+      <p>The App uses a small number of service providers that process information only on our instructions. AI processing happens only after you consent to it.</p>
+      <ul class="mu-list">
+        <li>Supabase hosts your account, database, and the App's server functions. It holds all of the information in section 1, encrypted in transit and at rest.</li>
+        <li>Anthropic (Claude) generates summaries, keywords, nutrition estimates, and suggested symptoms to track, and may look up product nutrition labels on the web. It receives the entries needed for that summary or estimate, your stated goals, gender at birth, and medical conditions. Not your name or email.</li>
+        <li>USDA FoodData Central is a public food nutrition database. It receives food names only (for example "chia seeds"), with nothing that identifies you.</li>
+        <li>Apple and Google deliver push notifications and, where used, speech recognition. They receive notification content (generic text) and dictated audio, under their own terms.</li>
+      </ul>
+      <p>Our AI provider's business terms do not allow it to use this data to train its models. AI output can be wrong: summaries and estimates are informational, not medical advice.</p>
+    </section>
+    <section>
+      <h2>4. Sharing and disclosure</h2>
+      <p>We do not sell, rent, or trade your information, and we do not share it for targeted advertising. Beyond the service providers in section 3, we disclose information only:</p>
+      <ul class="mu-list">
+        <li>With your direction: for example, when you export your data and choose to send it to a clinician.</li>
+        <li>When required by law: to comply with a valid subpoena, court order, or other legal process. Where the law allows, we will notify you first and disclose only what is required.</li>
+        <li>To protect safety: when we believe in good faith that disclosure is necessary to prevent imminent serious harm to a person.</li>
+        <li>In a business transfer: if MultiUnity is merged, acquired, or sold, your information may transfer to the new owner, who must honor this Policy. We will notify you in advance, and your health information will not transfer without your consent where the law requires it.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>5. Consumer Health Data Privacy Notice</h2>
+      <p>This notice is for residents of Washington (My Health My Data Act), Nevada (SB 370), Connecticut, and other states with consumer health data laws. Under those laws, nearly everything you record in the App is consumer health data.</p>
+      <ul class="mu-list">
+        <li>Categories collected: the health information, personal details, and derived information in section 1.</li>
+        <li>Purposes: only those in section 2. We collect and share consumer health data only with your consent, or as strictly necessary to provide the App you asked for.</li>
+        <li>Sources: you, and information the App generates from your entries.</li>
+        <li>Shared with: the service providers in section 3 (processors), under contracts limiting their use to providing the App. We do not share it with any other third party, affiliate, or data broker.</li>
+        <li>No sale: we never sell consumer health data. Any sale would require your separate, signed authorization.</li>
+        <li>Geofencing: we do not use geofences around health care facilities.</li>
+        <li>Your rights: to confirm whether we collect your consumer health data, to access it and see the list of everyone we shared it with, to withdraw consent, and to have it deleted. See section 6.</li>
+      </ul>
+      <p>We ask for your consent on a separate screen the first time you sign in, before you record anything. Collection consent and AI-processing consent are separate choices.</p>
+    </section>
+    <section>
+      <h2>6. Your choices and rights</h2>
+      <p>You can do most of this yourself in the App, at any time and at no cost.</p>
+      <ul class="mu-list">
+        <li>Access and export: Settings → Download data backup gives you a copy of your entries.</li>
+        <li>Correct: edit your personal details and goals in the App, or delete an entry and record it again.</li>
+        <li>Delete an entry: Entries by date → the trash button, for any date.</li>
+        <li>Delete everything: Settings → Delete account permanently removes your account and all of your data.</li>
+        <li>Withdraw consent: delete your account, or email us to stop AI processing. The App cannot run summaries or estimates without it.</li>
+        <li>Turn off reminders: Settings → Reminders.</li>
+        <li>Anything else: email info@multiunity-app.com.</li>
+      </ul>
+      <p>We respond to requests within 45 days, and tell you if we need up to 45 more. We will verify your identity using your account email first. If we deny a request, you can appeal by replying to our decision. We respond to appeals within 45 days, and you may contact your state attorney general if you disagree. We will not treat you differently for using any of these rights.</p>
+    </section>
+    <section>
+      <h2>7. Security, retention, and breach notification</h2>
+      <p>Security. Your information is encrypted in transit (TLS) and at rest. Database access is restricted per account, so one user's records cannot be read by another. Server functions accept only signed-in users and limit how often they can be called. Access by our own staff is limited to what is needed to run and support the App. No system is perfectly secure, so please use a strong, unique password.</p>
+      <p>Retention. We keep your information until you delete it or your account. When you delete an entry or your account, it is removed from our active database right away. Encrypted daily backups are kept for 7 days and then deleted. Copies on your own device are removed when you delete them or uninstall the App.</p>
+      <p>Breach notification. If a breach of security exposes your information, we will notify you by email without unreasonable delay, and no later than 60 days after we discover it, as required by the FTC Health Breach Notification Rule and state law. We will also notify regulators and, where required, the media.</p>
+    </section>
+    <section>
+      <h2>8. Other important information</h2>
+      <p>Children. The App is for adults 18 and older. We do not knowingly collect information from anyone under 18. If you believe a child has created an account, email us and we will delete it.</p>
+      <p>Where your data is stored. Your information is stored in the United States (Ohio). The App is intended for users in the United States.</p>
+      <p>HIPAA. MultiUnity is a consumer app you use for yourself. It is not provided by or for a doctor, hospital, or health plan, so HIPAA generally does not apply to it. We protect your information under this Policy and the consumer health privacy laws described above. If you share an export with your clinician, their copy is governed by their own privacy practices.</p>
+      <p>Changes. If we make a material change to this Policy, we will tell you in the App or by email before it takes effect. Where the change affects how we collect or share health data, we will ask for your consent again.</p>
+      <p>Contact. MultiUnity, <a href="mailto:info@multiunity-app.com">info@multiunity-app.com</a>.</p>
+    </section>
+  </section>
+
   <script>
     (() => {
       const root = document.getElementById('multiunityProductBrief');
@@ -1136,7 +1246,16 @@ html>body{padding:0}</style>
         panels.forEach((panel) => { panel.hidden = panel.dataset.muPanel !== name; });
       }
 
-      tabButtons.forEach((button) => button.addEventListener('click', () => selectTab(button.dataset.muTab)));
+      tabButtons.forEach((button) => button.addEventListener('click', () => {
+        selectTab(button.dataset.muTab);
+        history.replaceState(null, '', button.dataset.muTab === 'overview' ? location.pathname : `#${button.dataset.muTab}`);
+      }));
+      function selectTabFromHash() {
+        const name = location.hash.slice(1);
+        if (tabButtons.some((button) => button.dataset.muTab === name)) selectTab(name);
+      }
+      window.addEventListener('hashchange', selectTabFromHash);
+      selectTabFromHash();
 
       const domainData = {
         symptoms: ['Symptoms', 'Severity, disruption, timing, body area, notes, and changes over time.', 'Help users remember what changed and prepare precise questions without inferring a diagnosis.'],
