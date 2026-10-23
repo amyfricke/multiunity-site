@@ -1,0 +1,1550 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Multiunity Research Partnership Brief</title>
+<style>:root {
+  color-scheme: light dark;
+  background-color: var(--background) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: light-dark(rgb(255 255 255), rgb(24 24 24));
+  --foreground: light-dark(rgb(26 28 31), rgb(255 255 255));
+  --card: color-mix(in oklab, var(--foreground) 5%, transparent);
+  --card-foreground: var(--foreground);
+  --popover: light-dark(rgb(255 255 255), rgb(45 45 45));
+  --popover-foreground: var(--foreground);
+  --primary: light-dark(rgb(51 156 255), rgb(131 195 255));
+  --primary-foreground: light-dark(rgb(255 255 255), rgb(13 13 13));
+  --secondary: light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%));
+  --secondary-foreground: var(--foreground);
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: light-dark(
+    rgb(26 28 31 / 49.4%),
+    rgb(255 255 255 / 49.8%)
+  );
+  --accent: light-dark(rgb(229 242 255), rgb(13 39 63));
+  --accent-foreground: var(--primary);
+  --destructive: light-dark(rgb(226 85 7), rgb(255 133 73));
+  --border: light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%));
+  --input: light-dark(
+    rgb(26 28 31 / 11.8%),
+    color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+  );
+  --ring: light-dark(rgb(51 156 255), rgb(131 195 255 / 76%));
+  --font-size-base: 14px;
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, "Segoe UI", sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --radius: 12.5px;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 17'%3E%3Cpath d='M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z'/%3E%3C/svg%3E");
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+  --color-background-primary: var(--background);
+  --color-text-primary: var(--foreground);
+  --color-border-secondary: var(--border);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html > body {
+  margin: 0;
+  padding: 5px;
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--viz-font-weight-medium);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: superellipse(1.5);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: superellipse(1.5);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget > :not(.card) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls > .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls > .form-label > :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type="file"] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type="file"]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type="file"]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type="color"] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: superellipse(1.5);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  corner-shape: superellipse(1.5);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: "";
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type="radio"] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type="radio"]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: "";
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+    [aria-pressed="true"],
+    [aria-selected="true"],
+    .is-selected
+  ) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed="true"], [aria-selected="true"], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget > svg {
+  width: 100%;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html>body{padding:0}</style>
+</head>
+<body>
+<div id="multiunityProductBrief">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500&family=Fira+Sans:ital,wght@1,400;1,500&display=swap');
+    :root {
+      --mu-charcoal: light-dark(rgb(252 255 241), rgb(56 56 56));
+      --mu-charcoal-deep: light-dark(rgb(255 255 255), rgb(46 45 45));
+      --mu-charcoal-raised: light-dark(rgb(238 243 216), rgb(68 68 68));
+      --mu-cream: light-dark(rgb(32 32 32), rgb(238 243 216));
+      --mu-paper: light-dark(rgb(252 255 241), rgb(32 32 32));
+      --mu-coral: light-dark(rgb(160 27 35), rgb(206 99 99));
+      --mu-aqua: light-dark(rgb(65 86 88), rgb(140 228 207));
+      --mu-aqua-muted: light-dark(rgb(65 86 88), rgb(130 211 207));
+
+      --background: var(--mu-charcoal);
+      --foreground: var(--mu-cream);
+      --card: color-mix(in oklab, var(--mu-charcoal-raised) 74%, transparent);
+      --card-foreground: var(--mu-cream);
+      --popover: var(--mu-charcoal-deep);
+      --popover-foreground: var(--mu-cream);
+      --primary: var(--mu-aqua);
+      --primary-foreground: var(--mu-paper);
+      --secondary: var(--mu-charcoal-raised);
+      --secondary-foreground: var(--mu-cream);
+      --muted: color-mix(in oklab, var(--mu-cream) 10%, transparent);
+      --muted-foreground: color-mix(in oklab, var(--mu-cream) 72%, transparent);
+      --accent: color-mix(in oklab, var(--mu-aqua) 18%, transparent);
+      --accent-foreground: var(--mu-aqua);
+      --destructive: var(--mu-coral);
+      --border: color-mix(in oklab, var(--mu-cream) 22%, transparent);
+      --input: color-mix(in oklab, var(--mu-cream) 14%, transparent);
+      --ring: var(--mu-aqua-muted);
+      --viz-series-1: var(--mu-aqua);
+      --viz-series-2: var(--mu-coral);
+      --viz-series-3: var(--mu-aqua-muted);
+      --font-sans: "Comfortaa", -apple-system, system-ui, sans-serif;
+    }
+    #multiunityProductBrief { color: var(--foreground); }
+    #multiunityProductBrief h1,
+    #multiunityProductBrief h2 { font-family: "Fira Sans", var(--font-sans); font-style: italic; }
+    #multiunityProductBrief .mu-hero { display: grid; gap: 1rem; margin-bottom: 1rem; }
+    #multiunityProductBrief .mu-hero::before {
+      content: "";
+      display: block;
+      height: 0.35rem;
+      background: linear-gradient(90deg, var(--mu-coral), var(--mu-cream), var(--mu-aqua));
+      border-radius: var(--radius-full);
+    }
+    #multiunityProductBrief .mu-brand { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.7rem; }
+    #multiunityProductBrief .mu-wordmark { font-family: "Comfortaa", var(--font-sans); font-weight: 500; letter-spacing: 0.04em; }
+    #multiunityProductBrief .mu-wordmark-multi { color: var(--mu-coral); }
+    #multiunityProductBrief .mu-wordmark-unity { color: var(--mu-aqua); }
+    #multiunityProductBrief .mu-eyebrow { color: var(--muted-foreground); letter-spacing: 0.08em; text-transform: uppercase; }
+    #multiunityProductBrief .mu-title-accent { color: var(--mu-aqua); }
+    #multiunityProductBrief .mu-hero-copy { max-width: 60rem; }
+    #multiunityProductBrief .mu-pitch-flow { display: flex; flex-wrap: wrap; gap: 0.65rem; align-items: center; color: var(--mu-cream); }
+    #multiunityProductBrief .mu-pitch-arrow { color: var(--mu-coral); }
+    #multiunityProductBrief .mu-tabs,
+    #multiunityProductBrief .mu-controls,
+    #multiunityProductBrief .mu-status-row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+    #multiunityProductBrief .mu-tabs { margin-bottom: 1rem; }
+    #multiunityProductBrief .mu-panel { display: grid; gap: 1rem; }
+    #multiunityProductBrief .mu-panel[hidden] { display: none; }
+    #multiunityProductBrief .mu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.75rem; }
+    #multiunityProductBrief .mu-grid-wide { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 1rem; }
+    #multiunityProductBrief .mu-flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 0.5rem; align-items: stretch; }
+    #multiunityProductBrief .mu-flow-step { display: grid; grid-template-columns: 1fr auto; gap: 0.35rem; align-items: center; }
+    #multiunityProductBrief .mu-flow-step:last-child { grid-template-columns: 1fr; }
+    #multiunityProductBrief .mu-arrow { color: var(--muted-foreground); }
+    #multiunityProductBrief .mu-stack { display: grid; gap: 0.75rem; }
+    #multiunityProductBrief .mu-list { margin: 0; padding-left: 1.25rem; }
+    #multiunityProductBrief .mu-list li + li { margin-top: 0.35rem; }
+    #multiunityProductBrief .mu-kicker { color: var(--muted-foreground); margin: 0; }
+    #multiunityProductBrief .mu-statement { display: grid; gap: 0.5rem; }
+    #multiunityProductBrief .mu-stage-list { display: grid; gap: 0.75rem; }
+    #multiunityProductBrief .mu-stage[hidden] { display: none; }
+    #multiunityProductBrief .mu-stage-line { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+    #multiunityProductBrief .mu-code { white-space: pre-wrap; overflow-wrap: anywhere; }
+    #multiunityProductBrief table { width: 100%; border-collapse: collapse; }
+    #multiunityProductBrief th,
+    #multiunityProductBrief td { text-align: left; vertical-align: top; padding: 0.55rem; border-bottom: 1px solid var(--border); }
+    #multiunityProductBrief th { color: var(--muted-foreground); }
+    @media (max-width: 520px) {
+      #multiunityProductBrief .mu-flow-step { grid-template-columns: 1fr; }
+      #multiunityProductBrief .mu-arrow { display: none; }
+      #multiunityProductBrief th:nth-child(3),
+      #multiunityProductBrief td:nth-child(3) { display: none; }
+    }
+  </style>
+
+  <header class="mu-hero">
+    <div class="mu-brand">
+      <span class="mu-wordmark" aria-label="MultiUnity"><span class="mu-wordmark-multi">Multi</span><span class="mu-wordmark-unity">Unity</span></span>
+      <span class="mu-eyebrow text-small">Health data, unified around the person</span>
+    </div>
+    <div class="mu-hero-copy">
+      <h1>Make every doctor’s appointment <span class="mu-title-accent">count.</span></h1>
+      <p>MultiUnity turns the details of everyday health into evidence-linked insights and appointment-ready questions—so patients arrive prepared and clinicians get the context that matters.</p>
+    </div>
+    <div class="mu-pitch-flow" aria-label="MultiUnity product journey">
+      <span>Track what happened</span><span class="mu-pitch-arrow" aria-hidden="true">→</span>
+      <span>Understand what changed</span><span class="mu-pitch-arrow" aria-hidden="true">→</span>
+      <span>Arrive ready to ask</span>
+    </div>
+    <div class="mu-status-row" aria-label="Product principles">
+      <span class="viz-badge">Patient-controlled</span>
+      <span class="viz-badge">Evidence-linked</span>
+      <span class="viz-badge">Provider-flexible AI</span>
+    </div>
+  </header>
+
+  <nav class="mu-tabs" role="tablist" aria-label="MultiUnity brief sections">
+    <button class="btn btn-primary" type="button" role="tab" aria-selected="true" aria-controls="mu-overview" data-mu-tab="overview">Overview</button>
+    <button class="btn" type="button" role="tab" aria-selected="false" aria-controls="mu-product" data-mu-tab="product">Product</button>
+    <button class="btn" type="button" role="tab" aria-selected="false" aria-controls="mu-architecture" data-mu-tab="architecture">Architecture</button>
+    <button class="btn" type="button" role="tab" aria-selected="false" aria-controls="mu-context" data-mu-tab="context">AI &amp; context</button>
+    <button class="btn" type="button" role="tab" aria-selected="false" aria-controls="mu-business" data-mu-tab="business">Business</button>
+    <button class="btn" type="button" role="tab" aria-selected="false" aria-controls="mu-roadmap" data-mu-tab="roadmap">Roadmap</button>
+    <button class="btn" type="button" role="tab" aria-selected="false" aria-controls="mu-agents" data-mu-tab="agents">Agent guide</button>
+    <a class="btn" href="/privacy/">Privacy Policy</a>
+  </nav>
+
+  <section class="mu-panel" id="mu-overview" role="tabpanel" data-mu-panel="overview">
+    <div class="mu-statement">
+      <p class="mu-kicker">The product in one sentence</p>
+      <h2>Turn scattered daily observations into clearer conversations with clinicians.</h2>
+      <p>MultiUnity tracks symptoms, mood, food, interventions, vitals, and life observations so people can remember what happened, see evidence-linked patterns, prepare for appointments, and ask better questions.</p>
+    </div>
+
+    <div class="viz-grid">
+      <div class="card viz-stat">
+        <div class="text-muted">Capture</div>
+        <div class="viz-stat-value">Fast daily logging</div>
+        <div class="text-small">Reusable foods and interventions reduce friction.</div>
+      </div>
+      <div class="card viz-stat">
+        <div class="text-muted">Understand</div>
+        <div class="viz-stat-value">Evidence-linked patterns</div>
+        <div class="text-small">Describe timing and change without claiming causation.</div>
+      </div>
+      <div class="card viz-stat">
+        <div class="text-muted">Use</div>
+        <div class="viz-stat-value">Appointment brief</div>
+        <div class="text-small">Facts, trends, questions, dates, and source entries.</div>
+      </div>
+    </div>
+
+    <div class="mu-grid-wide">
+      <section>
+        <h2>What the app is</h2>
+        <ul class="mu-list">
+          <li>A structured memory for health and daily-life context.</li>
+          <li>A reflection tool that helps users compare categories over time.</li>
+          <li>An appointment-preparation tool with user-approved summaries.</li>
+          <li>An offline-resilient mobile app with optional secure sync.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>What the app is not</h2>
+        <ul class="mu-list">
+          <li>Not a diagnosis or a replacement for a clinician.</li>
+          <li>Not a medication-prescribing system.</li>
+          <li>Not proof that one event caused another.</li>
+          <li>Not currently secure for real personal health information.</li>
+        </ul>
+      </section>
+    </div>
+  </section>
+
+  <section class="mu-panel" id="mu-product" role="tabpanel" data-mu-panel="product" hidden>
+    <div>
+      <p class="mu-kicker">Six first-class tracking domains</p>
+      <h1>One timeline, multiple kinds of context</h1>
+    </div>
+    <div class="mu-grid" id="muDomainButtons" aria-label="Tracking domains">
+      <button class="btn viz-tile" type="button" aria-pressed="true" data-mu-domain="symptoms">Symptoms</button>
+      <button class="btn viz-tile" type="button" aria-pressed="false" data-mu-domain="mood">Mood</button>
+      <button class="btn viz-tile" type="button" aria-pressed="false" data-mu-domain="food">Food</button>
+      <button class="btn viz-tile" type="button" aria-pressed="false" data-mu-domain="interventions">Interventions</button>
+      <button class="btn viz-tile" type="button" aria-pressed="false" data-mu-domain="vitals">Vitals</button>
+      <button class="btn viz-tile" type="button" aria-pressed="false" data-mu-domain="observations">Observations</button>
+    </div>
+    <div class="card" id="muDomainDetail" aria-live="polite"></div>
+    <section class="mu-grid-wide">
+      <div>
+        <h2>Core user loop</h2>
+        <ol class="mu-list">
+          <li>Record something quickly.</li>
+          <li>Review category and cross-category trends.</li>
+          <li>Ask a focused reflection question.</li>
+          <li>Correct or annotate the interpretation.</li>
+          <li>Select what belongs in an appointment brief.</li>
+          <li>Share or export only with explicit user action.</li>
+        </ol>
+      </div>
+      <div>
+        <h2>Required trust behaviors</h2>
+        <ul class="mu-list">
+          <li>Every insight shows its date range and source entries.</li>
+          <li>Raw entries remain separate from generated summaries.</li>
+          <li>Users can edit, exclude, or delete generated material.</li>
+          <li>Missing data and uncertainty are stated plainly.</li>
+        </ul>
+      </div>
+    </section>
+  </section>
+
+  <section class="mu-panel" id="mu-architecture" role="tabpanel" data-mu-panel="architecture" hidden>
+    <div>
+      <p class="mu-kicker">Target system</p>
+      <h1>Offline-first capture with secure, incremental synchronization</h1>
+    </div>
+    <div class="mu-flow" id="muArchitectureFlow" aria-label="MultiUnity target architecture">
+      <div class="mu-flow-step"><button class="btn viz-tile" type="button" aria-pressed="true" data-mu-arch="client">Mobile / web client</button><span class="mu-arrow">→</span></div>
+      <div class="mu-flow-step"><button class="btn viz-tile" type="button" aria-pressed="false" data-mu-arch="sync">Sync queue</button><span class="mu-arrow">→</span></div>
+      <div class="mu-flow-step"><button class="btn viz-tile" type="button" aria-pressed="false" data-mu-arch="api">Authenticated API</button><span class="mu-arrow">→</span></div>
+      <div class="mu-flow-step"><button class="btn viz-tile" type="button" aria-pressed="false" data-mu-arch="store">Encrypted data store</button><span class="mu-arrow">→</span></div>
+      <div class="mu-flow-step"><button class="btn viz-tile" type="button" aria-pressed="false" data-mu-arch="retrieval">Retrieval &amp; summaries</button><span class="mu-arrow">→</span></div>
+      <div class="mu-flow-step"><button class="btn viz-tile" type="button" aria-pressed="false" data-mu-arch="ai">AI orchestrator</button><span class="mu-arrow">→</span></div>
+      <div class="mu-flow-step"><button class="btn viz-tile" type="button" aria-pressed="false" data-mu-arch="brief">Appointment brief</button></div>
+    </div>
+    <div class="card" id="muArchitectureDetail" aria-live="polite"></div>
+
+    <section>
+      <h2>Prototype versus production</h2>
+      <table aria-label="Prototype and production architecture comparison">
+        <thead><tr><th>Concern</th><th>Prototype today</th><th>Production target</th></tr></thead>
+        <tbody>
+          <tr><td>Persistence</td><td>AsyncStorage plus optional whole-state JSON mirror</td><td>Versioned domain records plus incremental sync</td></tr>
+          <tr><td>Authentication</td><td>Bundle-visible shared prototype key</td><td>User authentication, authorization, and per-user isolation</td></tr>
+          <tr><td>Transport</td><td>Local HTTP on Wi-Fi</td><td>HTTPS everywhere</td></tr>
+          <tr><td>AI context</td><td>Recent conversation turns and up to 20 entries</td><td>Task-specific retrieval with source links and explicit budgets</td></tr>
+          <tr><td>Generated output</td><td>Answer plus word-cluster keywords</td><td>Versioned summary, provenance, uncertainty, questions, and citations</td></tr>
+          <tr><td>Health data</td><td>Fictional test data only</td><td>Only after privacy, security, legal, and clinical gates</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </section>
+
+  <section class="mu-panel" id="mu-context" role="tabpanel" data-mu-panel="context" hidden>
+    <div>
+      <p class="mu-kicker">AI design</p>
+      <h1>Build context for the task; do not send the entire life history.</h1>
+    </div>
+    <div class="mu-controls" role="group" aria-label="Choose an AI task">
+      <button class="btn btn-primary" type="button" aria-pressed="true" data-mu-task="question">Ask a focused question</button>
+      <button class="btn" type="button" aria-pressed="false" data-mu-task="summary">Update a category summary</button>
+      <button class="btn" type="button" aria-pressed="false" data-mu-task="appointment">Prepare an appointment</button>
+    </div>
+    <div class="mu-grid-wide">
+      <section>
+        <h2>Context layers used</h2>
+        <ol class="mu-list" id="muContextLayers"></ol>
+      </section>
+      <section class="card">
+        <h2>Bounded request</h2>
+        <pre class="mu-code"><code id="muContextPayload"></code></pre>
+      </section>
+    </div>
+    <div class="mu-grid-wide">
+      <section>
+        <h2>Provider abstraction</h2>
+        <ul class="mu-list">
+          <li>Application code requests capabilities, not vendor-specific response shapes.</li>
+          <li>Adapters handle structured output, streaming, timeouts, retries, and metadata.</li>
+          <li>OpenAI is the current prototype provider.</li>
+          <li>An approved hosted or open-weight model may be added for privacy, reliability, deployment control, or cost.</li>
+          <li>Fallback providers preserve the same product boundaries and are never used to evade safety controls.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Helpful behavior when a request is constrained</h2>
+        <ul class="mu-list">
+          <li>Organize the user's facts into a neutral timeline.</li>
+          <li>Identify missing measurements or dates.</li>
+          <li>Draft questions the user can ask a qualified clinician.</li>
+          <li>Summarize what changed without diagnosing or prescribing.</li>
+          <li>Explain uncertainty and invite user correction.</li>
+        </ul>
+      </section>
+    </div>
+    <section>
+      <h2>Required output metadata</h2>
+      <div class="mu-status-row">
+        <span class="viz-badge">date range</span>
+        <span class="viz-badge">categories</span>
+        <span class="viz-badge">source entry IDs</span>
+        <span class="viz-badge">missing data</span>
+        <span class="viz-badge">uncertainties</span>
+        <span class="viz-badge">provider/model</span>
+        <span class="viz-badge">prompt version</span>
+        <span class="viz-badge">generated at</span>
+      </div>
+    </section>
+  </section>
+
+  <section class="mu-panel" id="mu-business" role="tabpanel" data-mu-panel="business" hidden>
+    <div>
+      <p class="mu-kicker">Business plan hypotheses</p>
+      <h1>Sell appointment preparedness and trustworthy synthesis—not chat volume.</h1>
+    </div>
+    <div class="mu-controls" role="group" aria-label="Business plan categories">
+      <button class="btn btn-primary" type="button" aria-pressed="true" data-mu-business="customer">Customer</button>
+      <button class="btn" type="button" aria-pressed="false" data-mu-business="value">Value</button>
+      <button class="btn" type="button" aria-pressed="false" data-mu-business="revenue">Revenue</button>
+      <button class="btn" type="button" aria-pressed="false" data-mu-business="research">Research</button>
+      <button class="btn" type="button" aria-pressed="false" data-mu-business="distribution">Distribution</button>
+      <button class="btn" type="button" aria-pressed="false" data-mu-business="costs">Costs</button>
+      <button class="btn" type="button" aria-pressed="false" data-mu-business="metrics">Metrics</button>
+    </div>
+    <div class="card" id="muBusinessDetail" aria-live="polite"></div>
+    <section class="mu-grid-wide">
+      <div>
+        <h2>Packaging hypothesis</h2>
+        <ul class="mu-list">
+          <li>Free: basic tracking and local history.</li>
+          <li>Consumer subscription: AI-assisted summaries, appointment briefs, advanced exports, and longer history.</li>
+          <li>Family/caregiver plan: explicit permissions and shared workflows.</li>
+          <li>Later pilots: clinics, coaches, or patient-support organizations after privacy and workflow validation.</li>
+          <li>Research partnerships: governed access to consented, de-identified datasets or analyses—not ownership of identifiable user records.</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Durable advantage hypothesis</h2>
+        <ul class="mu-list">
+          <li>User-controlled longitudinal data across six domains.</li>
+          <li>Evidence-linked corrections and summaries over time.</li>
+          <li>A trusted appointment workflow rather than a generic chatbot.</li>
+          <li>Reusable personal context that remains portable across AI providers.</li>
+        </ul>
+      </div>
+    </section>
+    <section>
+      <p class="mu-kicker">Long-term institutional opportunity</p>
+      <h2>A participant-consented real-world evidence platform</h2>
+      <p>At sufficient scale, MultiUnity could produce a uniquely rich longitudinal dataset connecting symptoms, mood, food, interventions, vitals, and everyday observations. Universities, nonprofit research groups, public-health organizations, and life-science companies could become paying customers for approved studies, aggregate analyses, governed data access, or consented participant recruitment. This revenue could help offset product development, privacy and security infrastructure, marketing, and responsible customer-acquisition costs.</p>
+      <div class="mu-grid-wide">
+        <div>
+          <h2>Commercial model</h2>
+          <ul class="mu-list">
+            <li>License purpose-limited aggregate datasets or analysis—not unrestricted raw-data resale.</li>
+            <li>Charge for cohort discovery, study dashboards, research-grade exports, or sponsored prospective studies.</li>
+            <li>Develop recurring institutional revenue only after data quality, scale, and research utility are validated.</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Non-negotiable trust conditions</h2>
+          <ul class="mu-list">
+            <li>Separate, informed, voluntary opt-in consent; declining never removes the core product.</li>
+            <li>De-identification, aggregation thresholds, re-identification risk review, access controls, and audited data-use agreements.</li>
+            <li>Plain-language disclosure of who is using the data, for what purpose, and what participants receive in return.</li>
+            <li>No sale of identifiable health records and no research program before privacy, legal, security, and independent governance review.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <section class="mu-panel" id="mu-roadmap" role="tabpanel" data-mu-panel="roadmap" hidden>
+    <div>
+      <p class="mu-kicker">Delivery sequence</p>
+      <h1>Validate usefulness before building a regulated-data platform.</h1>
+    </div>
+    <div class="mu-controls" role="group" aria-label="Filter roadmap">
+      <button class="btn btn-primary" type="button" aria-pressed="true" data-mu-roadmap="all">All</button>
+      <button class="btn" type="button" aria-pressed="false" data-mu-roadmap="now">Now</button>
+      <button class="btn" type="button" aria-pressed="false" data-mu-roadmap="next">Next</button>
+      <button class="btn" type="button" aria-pressed="false" data-mu-roadmap="later">Later</button>
+      <button class="btn" type="button" aria-pressed="false" data-mu-roadmap="gate">Safety gates</button>
+    </div>
+    <div class="mu-stage-list">
+      <section class="mu-stage" data-mu-phase="now">
+        <div class="mu-stage-line"><span class="viz-badge">Now</span><h2>Playable prototype</h2></div>
+        <p>Finish the Figma-aligned flows, six tracking domains, reusable entry patterns, summaries, and fictional-data play testing on web and iPhone.</p>
+      </section>
+      <section class="mu-stage" data-mu-phase="next">
+        <div class="mu-stage-line"><span class="viz-badge">Next</span><h2>Product validation</h2></div>
+        <p>Test logging speed, interview users and caregivers, define the minimum useful appointment brief, and replace static summary fixtures with transparent calculations over test entries.</p>
+      </section>
+      <section class="mu-stage" data-mu-phase="gate">
+        <div class="mu-stage-line"><span class="viz-badge">Safety gate</span><h2>Secure beta foundation</h2></div>
+        <p>Add authentication, HTTPS, encrypted storage, incremental sync, migrations, deletion/export, observability, threat modeling, and privacy/security/clinical review before real health data.</p>
+      </section>
+      <section class="mu-stage" data-mu-phase="later">
+        <div class="mu-stage-line"><span class="viz-badge">Later</span><h2>Context and appointment intelligence</h2></div>
+        <p>Add task-specific retrieval, versioned summaries with source links, user-editable appointment briefs, provider abstraction, evaluation harnesses, and cost controls.</p>
+      </section>
+      <section class="mu-stage" data-mu-phase="later">
+        <div class="mu-stage-line"><span class="viz-badge">Later</span><h2>Controlled pilots</h2></div>
+        <p>Run a small user/caregiver beta, then optional clinic or patient-organization pilots. Validate trust, workflow fit, usefulness, retention, and willingness to pay before scaling.</p>
+      </section>
+    </div>
+    <section>
+      <h2>Open decisions</h2>
+      <ul class="mu-list">
+        <li>Exact appointment-brief format and export channels.</li>
+        <li>Which summaries are deterministic versus AI-generated narrative.</li>
+        <li>Production hosting, database, authentication, analytics, and AI providers.</li>
+        <li>Launch geography, regulatory scope, caregiver permissions, and clinician sharing.</li>
+        <li>Pricing and packaging after initial validation.</li>
+      </ul>
+    </section>
+  </section>
+
+  <section class="mu-panel" id="mu-agents" role="tabpanel" data-mu-panel="agents" hidden>
+    <div>
+      <p class="mu-kicker">Repository operating guide</p>
+      <h1>Give every agent the product context before asking it to change code.</h1>
+    </div>
+    <div class="mu-grid-wide">
+      <section>
+        <h2>Read first</h2>
+        <ol class="mu-list">
+          <li><code>AGENTS.md</code> for durable product intent and constraints.</li>
+          <li><code>README.md</code> for setup and prototype operation.</li>
+          <li>The relevant files in <code>src/mvp/</code>.</li>
+          <li>The matching Figma frame for visual work.</li>
+          <li>This brief for shared architecture, business, and roadmap context.</li>
+        </ol>
+      </section>
+      <section>
+        <h2>Source-of-truth order</h2>
+        <ol class="mu-list">
+          <li>The user's explicit current request.</li>
+          <li><code>AGENTS.md</code> for durable product intent.</li>
+          <li>Figma for visual design and composition.</li>
+          <li>Existing code for current implemented behavior.</li>
+          <li>This brief for explanation, not override authority.</li>
+        </ol>
+      </section>
+    </div>
+    <section>
+      <h2>Non-negotiables</h2>
+      <div class="mu-grid">
+        <div><h3>Data</h3><p>Keep raw entries separate from generated summaries. Prefer structured fields to display strings.</p></div>
+        <div><h3>AI</h3><p>Show sources and uncertainty. Never diagnose, prescribe, invent data, or claim causation.</p></div>
+        <div><h3>Offline</h3><p>A failed sync or AI call must not prevent a local save.</p></div>
+        <div><h3>Security</h3><p>Keep secrets server-side. Use fictional data until the secure-beta gate is complete.</p></div>
+        <div><h3>Design</h3><p>Reuse theme and shared components; test narrow screens, touch, keyboard, and accessibility.</p></div>
+        <div><h3>Verification</h3><p>Run <code>pnpm lint</code> and visually check affected flows before handoff.</p></div>
+      </div>
+    </section>
+    <section class="card">
+      <h2>Definition of done</h2>
+      <ul class="mu-list">
+        <li>The requested flow works end to end and persists correctly.</li>
+        <li>Empty, loading, error, offline, and narrow-screen states were considered.</li>
+        <li>Accessibility labels and keyboard/touch behavior are reasonable.</li>
+        <li>Figma was checked where applicable.</li>
+        <li>Lint passes.</li>
+        <li>Durable documentation changed when product intent, APIs, data shape, or architecture changed.</li>
+      </ul>
+    </section>
+  </section>
+
+  <script>
+    (() => {
+      const root = document.getElementById('multiunityProductBrief');
+      const tabButtons = [...root.querySelectorAll('[data-mu-tab]')];
+      const panels = [...root.querySelectorAll('[data-mu-panel]')];
+
+      function selectTab(name) {
+        tabButtons.forEach((button) => {
+          const selected = button.dataset.muTab === name;
+          button.setAttribute('aria-selected', String(selected));
+          button.classList.toggle('btn-primary', selected);
+        });
+        panels.forEach((panel) => { panel.hidden = panel.dataset.muPanel !== name; });
+      }
+
+      tabButtons.forEach((button) => button.addEventListener('click', () => selectTab(button.dataset.muTab)));
+
+      const domainData = {
+        symptoms: ['Symptoms', 'Severity, disruption, timing, body area, notes, and changes over time.', 'Help users remember what changed and prepare precise questions without inferring a diagnosis.'],
+        mood: ['Mood', 'Depression, anxiety, irritability, emotional balance, context, and structured questionnaires.', 'Show day-to-day variability and dated patterns without turning a score into a diagnosis.'],
+        food: ['Food', 'Foods, ingredients, portions, beverages, recurring foods, and optional nutrition data.', 'Reduce retyping and help users compare intake with other tracked events without asserting intolerance or cause.'],
+        interventions: ['Interventions', 'Recurring medications, supplements, therapies, routines, doses, and times.', 'Make adherence and intervention changes visible beside other data while leaving intervention decisions to clinicians.'],
+        vitals: ['Vitals', 'Blood pressure, temperature, oxygen saturation, resting heart rate, weight, and bowel movements.', 'Preserve measurements and units, expose outliers, and connect every trend back to dated readings.'],
+        observations: ['Observations', 'Life events, environment, sleep, activity, injuries, development, routines, and caregiver notes.', 'Capture context that does not fit a symptom or measurement but may matter during review.']
+      };
+
+      const domainDetail = root.querySelector('#muDomainDetail');
+      function selectDomain(name) {
+        root.querySelectorAll('[data-mu-domain]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.muDomain === name)));
+        const [title, capture, purpose] = domainData[name];
+        domainDetail.innerHTML = `<h2>${title}</h2><p><strong>Capture:</strong> ${capture}</p><p><strong>Product purpose:</strong> ${purpose}</p>`;
+      }
+      root.querySelectorAll('[data-mu-domain]').forEach((button) => button.addEventListener('click', () => selectDomain(button.dataset.muDomain)));
+      selectDomain('symptoms');
+
+      const architectureData = {
+        client: ['Mobile / web client', 'Capture entries locally first. Maintain a durable outbox so network failure never blocks a save.'],
+        sync: ['Sync queue', 'Send incremental creates, updates, and deletes with version checks, retries, and conflict handling.'],
+        api: ['Authenticated API', 'Authorize every request, validate domain schemas, isolate users, apply rate limits, and record audit events.'],
+        store: ['Encrypted data store', 'Keep versioned raw entries, consent and sharing state, derived summaries, and deletion/export records.'],
+        retrieval: ['Retrieval & summaries', 'Filter by user-approved dates, domains, and task. Return structured evidence with source entry IDs.'],
+        ai: ['AI orchestrator', 'Use provider adapters, bounded context, structured outputs, provenance, timeouts, evaluation, and cost controls.'],
+        brief: ['Appointment brief', 'Assemble user-approved facts, trends, uncertainties, questions, and source references into an editable export.']
+      };
+      const architectureDetail = root.querySelector('#muArchitectureDetail');
+      function selectArchitecture(name) {
+        root.querySelectorAll('[data-mu-arch]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.muArch === name)));
+        const [title, detail] = architectureData[name];
+        architectureDetail.innerHTML = `<h2>${title}</h2><p>${detail}</p>`;
+      }
+      root.querySelectorAll('[data-mu-arch]').forEach((button) => button.addEventListener('click', () => selectArchitecture(button.dataset.muArch)));
+      selectArchitecture('client');
+
+      const taskData = {
+        question: {
+          layers: ['User-selected preferences', 'Recent conversation window', 'Entries retrieved for the question', 'Relevant category summary', 'Safety and output contract'],
+          payload: { task: 'answer_reflection_question', dateRange: 'user selected', domains: ['relevant only'], maxEntries: 20, conversationTurns: 8, requireSourceIds: true }
+        },
+        summary: {
+          layers: ['Category schema and units', 'Entries since the previous summary', 'Previous versioned summary', 'Corrections made by the user', 'Summary output contract'],
+          payload: { task: 'update_category_summary', domain: 'one category', deltaOnly: true, retainPreviousVersion: true, requireSourceIds: true }
+        },
+        appointment: {
+          layers: ['Appointment purpose and clinician type', 'User-approved date range and categories', 'Current category summaries', 'Important changes and outliers', 'User-selected questions and exclusions'],
+          payload: { task: 'prepare_appointment_brief', editable: true, includeUncertainty: true, includeQuestions: true, requireSourceIds: true }
+        }
+      };
+      const contextLayers = root.querySelector('#muContextLayers');
+      const contextPayload = root.querySelector('#muContextPayload');
+      function selectTask(name) {
+        root.querySelectorAll('[data-mu-task]').forEach((button) => {
+          const selected = button.dataset.muTask === name;
+          button.setAttribute('aria-pressed', String(selected));
+          button.classList.toggle('btn-primary', selected);
+        });
+        contextLayers.innerHTML = taskData[name].layers.map((layer) => `<li>${layer}</li>`).join('');
+        contextPayload.textContent = JSON.stringify(taskData[name].payload, null, 2);
+      }
+      root.querySelectorAll('[data-mu-task]').forEach((button) => button.addEventListener('click', () => selectTask(button.dataset.muTask)));
+      selectTask('question');
+
+      const businessData = {
+        customer: ['Initial customer', 'Individuals and caregivers managing complex, chronic, or fluctuating health context. Later buyers may include families, clinics, coaches, patient-support organizations, and approved research institutions.'],
+        value: ['Core value', 'Reduce recall burden and make appointments more productive through fast tracking, trustworthy synthesis, and an evidence-linked brief.'],
+        revenue: ['Revenue hypotheses', 'A free tracking tier; consumer subscription for AI summaries, briefs, exports, and longer history; a family plan; controlled organizational pilots; and later research partnerships built on consented, de-identified data access and analysis.'],
+        research: ['Research partnerships', 'A rich longitudinal dataset could support paid academic, public-health, nonprofit, and life-science research. Customers would purchase purpose-limited access, aggregate analysis, or approved study services—not identifiable records—and the proceeds could help fund development, security, marketing, and customer acquisition.'],
+        distribution: ['Distribution hypotheses', 'Patient and caregiver communities, advocacy organizations, educational appointment-preparation content, and clinician referrals after usefulness is demonstrated.'],
+        costs: ['Key costs', 'Engineering, secure storage and sync, AI inference, retrieval, observability, privacy/security/legal/clinical review, customer support, and trust operations.'],
+        metrics: ['Success metrics', 'Logging speed and repeat use, appointment-brief creation, preparedness and recall confidence, clinician usefulness, source-link coverage, corrections, retention, conversion, inference cost, and support burden.']
+      };
+      const businessDetail = root.querySelector('#muBusinessDetail');
+      function selectBusiness(name) {
+        root.querySelectorAll('[data-mu-business]').forEach((button) => {
+          const selected = button.dataset.muBusiness === name;
+          button.setAttribute('aria-pressed', String(selected));
+          button.classList.toggle('btn-primary', selected);
+        });
+        const [title, detail] = businessData[name];
+        businessDetail.innerHTML = `<h2>${title}</h2><p>${detail}</p>`;
+      }
+      root.querySelectorAll('[data-mu-business]').forEach((button) => button.addEventListener('click', () => selectBusiness(button.dataset.muBusiness)));
+      selectBusiness('customer');
+
+      function filterRoadmap(filter) {
+        root.querySelectorAll('[data-mu-roadmap]').forEach((button) => {
+          const selected = button.dataset.muRoadmap === filter;
+          button.setAttribute('aria-pressed', String(selected));
+          button.classList.toggle('btn-primary', selected);
+        });
+        root.querySelectorAll('[data-mu-phase]').forEach((stage) => { stage.hidden = filter !== 'all' && stage.dataset.muPhase !== filter; });
+      }
+      root.querySelectorAll('[data-mu-roadmap]').forEach((button) => button.addEventListener('click', () => filterRoadmap(button.dataset.muRoadmap)));
+    })();
+  </script>
+</div>
+
+<script src="https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js"></script>
+<script src="https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js"></script>
+<script>
+(() => {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set(["top", "right", "bottom", "left"]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+
+  const getTrigger = (target) =>
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest("[data-tooltip]")
+      : null;
+  const containsTarget = (trigger, target) =>
+    target?.nodeType != null && trigger.contains(target);
+  const getContent = (trigger) =>
+    trigger.getAttribute("data-tooltip")?.trim() ?? "";
+  const getPlacement = (trigger) => {
+    const placement = trigger.getAttribute("data-tooltip-placement");
+    return tooltipPlacements.has(placement) ? placement : "top";
+  };
+  const getTooltip = () => {
+    if (tooltip == null) {
+      tooltip = document.createElement("div");
+      tooltip.id = tooltipId;
+      tooltip.className = "tooltip";
+      tooltip.setAttribute("role", "tooltip");
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) => {
+    const ids = new Set(
+      (trigger.getAttribute("aria-describedby") ?? "")
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute("aria-describedby");
+    } else {
+      trigger.setAttribute("aria-describedby", [...ids].join(" "));
+    }
+  };
+  const clearOpenTimeout = () => {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) => {
+    clearOpenTimeout();
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) => {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              "--tooltip-available-width",
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              "--tooltip-available-height",
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: "fixed",
+    })
+      .then(({ x, y }) => {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = "visible";
+      })
+      .catch(() => {
+        if (activeTrigger === trigger && request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) => {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = "hidden";
+    floating.style.transform = "translate(0, 0)";
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () => {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) => {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() < skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() => {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) => {
+    if (event.pointerType === "touch") {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handleLeave = (event) => {
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) => {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(":focus-visible")) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) => {
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () => {
+    closeTooltip(false);
+    document.removeEventListener("pointerover", handlePointerOpen);
+    document.removeEventListener("pointerout", handleLeave);
+    document.removeEventListener("focusin", handleFocusIn);
+    document.removeEventListener("focusout", handleLeave);
+    document.removeEventListener("keydown", handleKeyDown);
+    document.removeEventListener("contextmenu", handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener("pointerover", handlePointerOpen);
+  document.addEventListener("pointerout", handleLeave);
+  document.addEventListener("focusin", handleFocusIn);
+  document.addEventListener("focusout", handleLeave);
+  document.addEventListener("keydown", handleKeyDown);
+  document.addEventListener("contextmenu", handleContextMenu);
+  window.addEventListener("pagehide", destroy, { once: true });
+})();
+</script>
+<script id="codex-visualization-lucide" async src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js"></script>
+<script>
+(() => {
+  const initialize = () => {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById("codex-visualization-lucide")
+    ?.addEventListener("load", initialize, { once: true });
+})();
+</script>
+
+</body>
+</html>
