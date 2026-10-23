@@ -850,11 +850,8 @@ html>body{padding:0}</style>
   <nav class="mu-tabs" role="tablist" aria-label="MultiUnity brief sections">
     <button class="btn btn-primary" type="button" role="tab" aria-selected="true" aria-controls="mu-overview" data-mu-tab="overview">Overview</button>
     <button class="btn" type="button" role="tab" aria-selected="false" aria-controls="mu-product" data-mu-tab="product">Product</button>
-    <button class="btn" type="button" role="tab" aria-selected="false" aria-controls="mu-architecture" data-mu-tab="architecture">Architecture</button>
-    <button class="btn" type="button" role="tab" aria-selected="false" aria-controls="mu-context" data-mu-tab="context">AI &amp; context</button>
     <button class="btn" type="button" role="tab" aria-selected="false" aria-controls="mu-business" data-mu-tab="business">Business</button>
-    <button class="btn" type="button" role="tab" aria-selected="false" aria-controls="mu-roadmap" data-mu-tab="roadmap">Roadmap</button>
-    <button class="btn" type="button" role="tab" aria-selected="false" aria-controls="mu-agents" data-mu-tab="agents">Agent guide</button>
+    <button class="btn" type="button" role="tab" aria-selected="false" aria-controls="mu-terms" data-mu-tab="terms">Terms of Use</button>
     <a class="btn" href="/privacy/">Privacy Policy</a>
   </nav>
 
@@ -943,95 +940,6 @@ html>body{padding:0}</style>
     </section>
   </section>
 
-  <section class="mu-panel" id="mu-architecture" role="tabpanel" data-mu-panel="architecture" hidden>
-    <div>
-      <p class="mu-kicker">Target system</p>
-      <h1>Offline-first capture with secure, incremental synchronization</h1>
-    </div>
-    <div class="mu-flow" id="muArchitectureFlow" aria-label="MultiUnity target architecture">
-      <div class="mu-flow-step"><button class="btn viz-tile" type="button" aria-pressed="true" data-mu-arch="client">Mobile / web client</button><span class="mu-arrow">→</span></div>
-      <div class="mu-flow-step"><button class="btn viz-tile" type="button" aria-pressed="false" data-mu-arch="sync">Sync queue</button><span class="mu-arrow">→</span></div>
-      <div class="mu-flow-step"><button class="btn viz-tile" type="button" aria-pressed="false" data-mu-arch="api">Authenticated API</button><span class="mu-arrow">→</span></div>
-      <div class="mu-flow-step"><button class="btn viz-tile" type="button" aria-pressed="false" data-mu-arch="store">Encrypted data store</button><span class="mu-arrow">→</span></div>
-      <div class="mu-flow-step"><button class="btn viz-tile" type="button" aria-pressed="false" data-mu-arch="retrieval">Retrieval &amp; summaries</button><span class="mu-arrow">→</span></div>
-      <div class="mu-flow-step"><button class="btn viz-tile" type="button" aria-pressed="false" data-mu-arch="ai">AI orchestrator</button><span class="mu-arrow">→</span></div>
-      <div class="mu-flow-step"><button class="btn viz-tile" type="button" aria-pressed="false" data-mu-arch="brief">Appointment brief</button></div>
-    </div>
-    <div class="card" id="muArchitectureDetail" aria-live="polite"></div>
-
-    <section>
-      <h2>Prototype versus production</h2>
-      <table aria-label="Prototype and production architecture comparison">
-        <thead><tr><th>Concern</th><th>Prototype today</th><th>Production target</th></tr></thead>
-        <tbody>
-          <tr><td>Persistence</td><td>AsyncStorage plus optional whole-state JSON mirror</td><td>Versioned domain records plus incremental sync</td></tr>
-          <tr><td>Authentication</td><td>Bundle-visible shared prototype key</td><td>User authentication, authorization, and per-user isolation</td></tr>
-          <tr><td>Transport</td><td>Local HTTP on Wi-Fi</td><td>HTTPS everywhere</td></tr>
-          <tr><td>AI context</td><td>Recent conversation turns and up to 20 entries</td><td>Task-specific retrieval with source links and explicit budgets</td></tr>
-          <tr><td>Generated output</td><td>Answer plus word-cluster keywords</td><td>Versioned summary, provenance, uncertainty, questions, and citations</td></tr>
-          <tr><td>Health data</td><td>Fictional test data only</td><td>Only after privacy, security, legal, and clinical gates</td></tr>
-        </tbody>
-      </table>
-    </section>
-  </section>
-
-  <section class="mu-panel" id="mu-context" role="tabpanel" data-mu-panel="context" hidden>
-    <div>
-      <p class="mu-kicker">AI design</p>
-      <h1>Build context for the task; do not send the entire life history.</h1>
-    </div>
-    <div class="mu-controls" role="group" aria-label="Choose an AI task">
-      <button class="btn btn-primary" type="button" aria-pressed="true" data-mu-task="question">Ask a focused question</button>
-      <button class="btn" type="button" aria-pressed="false" data-mu-task="summary">Update a category summary</button>
-      <button class="btn" type="button" aria-pressed="false" data-mu-task="appointment">Prepare an appointment</button>
-    </div>
-    <div class="mu-grid-wide">
-      <section>
-        <h2>Context layers used</h2>
-        <ol class="mu-list" id="muContextLayers"></ol>
-      </section>
-      <section class="card">
-        <h2>Bounded request</h2>
-        <pre class="mu-code"><code id="muContextPayload"></code></pre>
-      </section>
-    </div>
-    <div class="mu-grid-wide">
-      <section>
-        <h2>Provider abstraction</h2>
-        <ul class="mu-list">
-          <li>Application code requests capabilities, not vendor-specific response shapes.</li>
-          <li>Adapters handle structured output, streaming, timeouts, retries, and metadata.</li>
-          <li>OpenAI is the current prototype provider.</li>
-          <li>An approved hosted or open-weight model may be added for privacy, reliability, deployment control, or cost.</li>
-          <li>Fallback providers preserve the same product boundaries and are never used to evade safety controls.</li>
-        </ul>
-      </section>
-      <section>
-        <h2>Helpful behavior when a request is constrained</h2>
-        <ul class="mu-list">
-          <li>Organize the user's facts into a neutral timeline.</li>
-          <li>Identify missing measurements or dates.</li>
-          <li>Draft questions the user can ask a qualified clinician.</li>
-          <li>Summarize what changed without diagnosing or prescribing.</li>
-          <li>Explain uncertainty and invite user correction.</li>
-        </ul>
-      </section>
-    </div>
-    <section>
-      <h2>Required output metadata</h2>
-      <div class="mu-status-row">
-        <span class="viz-badge">date range</span>
-        <span class="viz-badge">categories</span>
-        <span class="viz-badge">source entry IDs</span>
-        <span class="viz-badge">missing data</span>
-        <span class="viz-badge">uncertainties</span>
-        <span class="viz-badge">provider/model</span>
-        <span class="viz-badge">prompt version</span>
-        <span class="viz-badge">generated at</span>
-      </div>
-    </section>
-  </section>
-
   <section class="mu-panel" id="mu-business" role="tabpanel" data-mu-panel="business" hidden>
     <div>
       <p class="mu-kicker">Business plan hypotheses</p>
@@ -1094,99 +1002,114 @@ html>body{padding:0}</style>
     </section>
   </section>
 
-  <section class="mu-panel" id="mu-roadmap" role="tabpanel" data-mu-panel="roadmap" hidden>
-    <div>
-      <p class="mu-kicker">Delivery sequence</p>
-      <h1>Validate usefulness before building a regulated-data platform.</h1>
-    </div>
-    <div class="mu-controls" role="group" aria-label="Filter roadmap">
-      <button class="btn btn-primary" type="button" aria-pressed="true" data-mu-roadmap="all">All</button>
-      <button class="btn" type="button" aria-pressed="false" data-mu-roadmap="now">Now</button>
-      <button class="btn" type="button" aria-pressed="false" data-mu-roadmap="next">Next</button>
-      <button class="btn" type="button" aria-pressed="false" data-mu-roadmap="later">Later</button>
-      <button class="btn" type="button" aria-pressed="false" data-mu-roadmap="gate">Safety gates</button>
-    </div>
-    <div class="mu-stage-list">
-      <section class="mu-stage" data-mu-phase="now">
-        <div class="mu-stage-line"><span class="viz-badge">Now</span><h2>Playable prototype</h2></div>
-        <p>Finish the Figma-aligned flows, six tracking domains, reusable entry patterns, summaries, and fictional-data play testing on web and iPhone.</p>
-      </section>
-      <section class="mu-stage" data-mu-phase="next">
-        <div class="mu-stage-line"><span class="viz-badge">Next</span><h2>Product validation</h2></div>
-        <p>Test logging speed, interview users and caregivers, define the minimum useful appointment brief, and replace static summary fixtures with transparent calculations over test entries.</p>
-      </section>
-      <section class="mu-stage" data-mu-phase="gate">
-        <div class="mu-stage-line"><span class="viz-badge">Safety gate</span><h2>Secure beta foundation</h2></div>
-        <p>Add authentication, HTTPS, encrypted storage, incremental sync, migrations, deletion/export, observability, threat modeling, and privacy/security/clinical review before real health data.</p>
-      </section>
-      <section class="mu-stage" data-mu-phase="later">
-        <div class="mu-stage-line"><span class="viz-badge">Later</span><h2>Context and appointment intelligence</h2></div>
-        <p>Add task-specific retrieval, versioned summaries with source links, user-editable appointment briefs, provider abstraction, evaluation harnesses, and cost controls.</p>
-      </section>
-      <section class="mu-stage" data-mu-phase="later">
-        <div class="mu-stage-line"><span class="viz-badge">Later</span><h2>Controlled pilots</h2></div>
-        <p>Run a small user/caregiver beta, then optional clinic or patient-organization pilots. Validate trust, workflow fit, usefulness, retention, and willingness to pay before scaling.</p>
-      </section>
-    </div>
+  <section class="mu-panel" id="mu-terms" role="tabpanel" data-mu-panel="terms" hidden>
+    <section class="card">
+      <h2>Terms of Use</h2>
+      <p><strong>Draft pending legal review.</strong> These terms may change before they take effect. Effective date: [EFFECTIVE DATE].</p>
+      <p>These Terms of Use ("Terms") are an agreement between you and [OWNER LEGAL NAME] ("we," "us") governing your use of the MultiUnity mobile and web application and related services (the "App"). Please read them carefully, including the sections on medical disclaimers, limitation of liability, and indemnification.</p>
+    </section>
     <section>
-      <h2>Open decisions</h2>
+      <h2>1. Acceptance and eligibility</h2>
+      <p>By creating an account, accessing, or using the App, you agree to these Terms. If you do not agree, do not use the App.</p>
       <ul class="mu-list">
-        <li>Exact appointment-brief format and export channels.</li>
-        <li>Which summaries are deterministic versus AI-generated narrative.</li>
-        <li>Production hosting, database, authentication, analytics, and AI providers.</li>
-        <li>Launch geography, regulatory scope, caregiver permissions, and clinician sharing.</li>
-        <li>Pricing and packaging after initial validation.</li>
+        <li>Age. You must be at least 18 years old, or the age of majority where you live, to use the App.</li>
+        <li>Personal use. The App is for your own personal, non-commercial health tracking. It is not intended for use by healthcare providers to treat patients or to manage another person's care.</li>
+        <li>Changes. We may update these Terms at any time. If we make material changes, we will notify you in the App or by email. Continuing to use the App after changes take effect means you accept the updated Terms.</li>
       </ul>
     </section>
-  </section>
-
-  <section class="mu-panel" id="mu-agents" role="tabpanel" data-mu-panel="agents" hidden>
-    <div>
-      <p class="mu-kicker">Repository operating guide</p>
-      <h1>Give every agent the product context before asking it to change code.</h1>
-    </div>
-    <div class="mu-grid-wide">
-      <section>
-        <h2>Read first</h2>
-        <ol class="mu-list">
-          <li><code>AGENTS.md</code> for durable product intent and constraints.</li>
-          <li><code>README.md</code> for setup and prototype operation.</li>
-          <li>The relevant files in <code>src/mvp/</code>.</li>
-          <li>The matching Figma frame for visual work.</li>
-          <li>This brief for shared architecture, business, and roadmap context.</li>
-        </ol>
-      </section>
-      <section>
-        <h2>Source-of-truth order</h2>
-        <ol class="mu-list">
-          <li>The user's explicit current request.</li>
-          <li><code>AGENTS.md</code> for durable product intent.</li>
-          <li>Figma for visual design and composition.</li>
-          <li>Existing code for current implemented behavior.</li>
-          <li>This brief for explanation, not override authority.</li>
-        </ol>
-      </section>
-    </div>
     <section>
-      <h2>Non-negotiables</h2>
-      <div class="mu-grid">
-        <div><h3>Data</h3><p>Keep raw entries separate from generated summaries. Prefer structured fields to display strings.</p></div>
-        <div><h3>AI</h3><p>Show sources and uncertainty. Never diagnose, prescribe, invent data, or claim causation.</p></div>
-        <div><h3>Offline</h3><p>A failed sync or AI call must not prevent a local save.</p></div>
-        <div><h3>Security</h3><p>Keep secrets server-side. Use fictional data until the secure-beta gate is complete.</p></div>
-        <div><h3>Design</h3><p>Reuse theme and shared components; test narrow screens, touch, keyboard, and accessibility.</p></div>
-        <div><h3>Verification</h3><p>Run <code>pnpm lint</code> and visually check affected flows before handoff.</p></div>
-      </div>
-    </section>
-    <section class="card">
-      <h2>Definition of done</h2>
+      <h2>2. Not medical advice</h2>
+      <p>The App is a personal tracking and informational tool. It is not a medical device and does not provide medical advice, diagnosis, or treatment.</p>
       <ul class="mu-list">
-        <li>The requested flow works end to end and persists correctly.</li>
-        <li>Empty, loading, error, offline, and narrow-screen states were considered.</li>
-        <li>Accessibility labels and keyboard/touch behavior are reasonable.</li>
-        <li>Figma was checked where applicable.</li>
-        <li>Lint passes.</li>
-        <li>Durable documentation changed when product intent, APIs, data shape, or architecture changed.</li>
+        <li>No professional relationship. Using the App does not create a doctor–patient or any other healthcare-provider relationship between you and us.</li>
+        <li>Consult a clinician. Always seek the advice of a qualified healthcare professional before making decisions about medications, diet, symptoms, or any medical condition. Never disregard professional advice or delay seeking it because of something in the App.</li>
+        <li>Emergencies. The App is not monitored and cannot respond to emergencies. If you think you may have a medical emergency, call 911 or your local emergency number. If you are in crisis or thinking about harming yourself, call or text 988 (Suicide &amp; Crisis Lifeline, U.S.) or your local crisis line.</li>
+        <li>Screening questionnaires. Questionnaires such as the PHQ-9 and GAD-7 are screening aids only. A score is not a diagnosis.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>3. AI-generated content and estimates</h2>
+      <p>The App uses artificial intelligence and third-party data to generate summaries, keywords, suggested questions for your clinician, condition-related tracking suggestions, and nutrition estimates (including calories, fiber, added sugar, protein, fat, water, and other values).</p>
+      <ul class="mu-list">
+        <li>Estimates may be wrong. AI output and nutrition estimates can be inaccurate, incomplete, outdated, or inconsistent between entries. Portion sizes, brands, and ingredients are often assumed, and the App may misread what you entered.</li>
+        <li>Verify before relying. You are responsible for reviewing all generated content and checking important values against product labels or a qualified professional.</li>
+        <li>Not for clinical decisions. Do not use App output to calculate medication or insulin doses, manage a medically prescribed diet, diagnose a condition, or decide whether to seek care.</li>
+        <li>No guarantee of results. We do not promise that using the App will improve your health or help you meet any goal.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>4. Your responsibilities and prohibited uses</h2>
+      <p>You are responsible for how you use the App and for any decisions you make based on it. You are also responsible for keeping your login credentials secure and for all activity under your account.</p>
+      <p>You agree not to:</p>
+      <ol class="mu-list">
+        <li>Use the App in place of professional medical care, or to make treatment or dosing decisions for yourself or anyone else.</li>
+        <li>Enter health information about another person without their permission, or use the App to monitor, track, or make decisions about someone else.</li>
+        <li>Use the App for any unlawful purpose or in violation of any applicable law, including health-privacy laws.</li>
+        <li>Copy, modify, reverse engineer, decompile, or attempt to extract the App's source code, models, or prompts, except where law expressly permits it.</li>
+        <li>Interfere with or overload the App or its servers, including by automated or excessive requests, scraping, or attempts to bypass usage limits or security.</li>
+        <li>Attempt to access another user's account or data.</li>
+        <li>Upload or enter content that is unlawful, infringing, or harmful, or that is designed to manipulate the App's AI features.</li>
+        <li>Resell, sublicense, or commercially exploit the App.</li>
+      </ol>
+      <p>We may investigate suspected violations and take any action we consider appropriate, including suspending or terminating access.</p>
+    </section>
+    <section>
+      <h2>5. Your content and data</h2>
+      <p>You keep ownership of the information you enter into the App, such as food, symptom, mood, vital, and medication entries ("Your Content").</p>
+      <ul class="mu-list">
+        <li>License to operate. You grant us a limited license to store, process, and transmit Your Content only as needed to run the App. That includes sending it to the service providers listed in Section 6 to generate estimates and summaries.</li>
+        <li>Accuracy is yours. You are responsible for the accuracy and completeness of what you enter. Estimates and summaries depend on it.</li>
+        <li>Privacy. How we collect, use, and protect your information is described in our Privacy Policy at https://multiunity-app.com/privacy/. Health information is sensitive, so only enter what you are comfortable storing.</li>
+        <li>Backups. We do not guarantee that Your Content will never be lost or corrupted. Export or keep copies of anything important.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>6. Third-party services and data</h2>
+      <p>The App relies on outside services that we do not control. These include AI model providers, USDA FoodData Central nutrition data, product information found through web search, cloud hosting and database providers, and your device's notification system.</p>
+      <p>We do not warrant the accuracy, availability, or security of any third-party service or data, and we are not responsible for their acts or omissions. Your use of linked third-party sites or products is at your own risk and subject to their terms.</p>
+    </section>
+    <section>
+      <h2>7. Reminders and notifications</h2>
+      <p>Reminders for check-ins, questionnaires, and medications or other interventions are a convenience only. They may be delayed, silenced, or not delivered at all because of device settings, Focus modes, battery restrictions, revoked permissions, or service problems.</p>
+      <p>Do not rely on the App as your only reminder to take medication or complete any time-sensitive health task. You remain responsible for following your treatment plan.</p>
+    </section>
+    <section>
+      <h2>8. Disclaimer of warranties</h2>
+      <p>THE APP AND ALL CONTENT, ESTIMATES, SUMMARIES, AND SUGGESTIONS IN IT ARE PROVIDED "AS IS" AND "AS AVAILABLE," WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, AND ACCURACY.</p>
+      <p>WE DO NOT WARRANT THAT THE APP WILL BE UNINTERRUPTED, ERROR-FREE, SECURE, OR FREE OF HARMFUL COMPONENTS, OR THAT ANY INFORMATION IT PROVIDES IS ACCURATE, COMPLETE, OR SUITABLE FOR YOUR HEALTH NEEDS.</p>
+    </section>
+    <section>
+      <h2>9. Limitation of liability</h2>
+      <p>TO THE FULLEST EXTENT PERMITTED BY LAW, [OWNER LEGAL NAME] AND ITS OWNERS, CONTRACTORS, AND SERVICE PROVIDERS WILL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES. THIS INCLUDES PERSONAL INJURY, ILLNESS, OR HEALTH OUTCOMES, AND LOSS OF DATA, PROFITS, OR GOODWILL, ARISING OUT OF OR RELATED TO THE APP OR THESE TERMS. IT APPLIES WHETHER THE CLAIM IS BASED IN CONTRACT, TORT (INCLUDING NEGLIGENCE), PRODUCT LIABILITY, OR ANY OTHER THEORY, EVEN IF WE WERE ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+      <p>OUR TOTAL LIABILITY FOR ALL CLAIMS RELATED TO THE APP WILL NOT EXCEED THE GREATER OF (A) THE AMOUNT YOU PAID US FOR THE APP IN THE 12 MONTHS BEFORE THE CLAIM, OR (B) US $50.</p>
+      <p>Some jurisdictions do not allow certain warranties to be excluded or certain damages to be limited, such as liability for gross negligence, willful misconduct, or death or personal injury caused by negligence. In those jurisdictions, these limits apply only to the extent the law allows.</p>
+    </section>
+    <section>
+      <h2>10. Assumption of risk and indemnification</h2>
+      <p>Assumption of risk. You understand that health-related tracking and AI-generated estimates carry inherent risks of error. You voluntarily assume all risks from your use of the App and from any decisions you make based on it.</p>
+      <p>Indemnification. You agree to defend, indemnify, and hold harmless [OWNER LEGAL NAME] and its owners, contractors, and service providers from and against all claims, damages, losses, liabilities, costs, and expenses, including reasonable attorneys' fees, arising out of or related to:</p>
+      <ol class="mu-list">
+        <li>your use or misuse of the App;</li>
+        <li>Your Content, including any information you entered about another person;</li>
+        <li>your violation of these Terms; or</li>
+        <li>your violation of any law or the rights of any third party.</li>
+      </ol>
+    </section>
+    <section>
+      <h2>11. Termination</h2>
+      <p>You may stop using the App and delete your account at any time. We may suspend or terminate your access, with or without notice, if you violate these Terms, if required by law, or if we discontinue the App.</p>
+      <p>We may modify, suspend, or discontinue any part of the App at any time without liability to you. Sections 2, 3, 5 (Backups), and 8–12 survive termination.</p>
+    </section>
+    <section>
+      <h2>12. Governing law, disputes, and general terms</h2>
+      <ul class="mu-list">
+        <li>Governing law. These Terms are governed by the laws of the State of [STATE], without regard to its conflict-of-laws rules.</li>
+        <li>Disputes. Before filing any claim, you agree to contact us at info@multiunity-app.com and try to resolve the dispute informally for at least 30 days. Any claim that is not resolved will be brought exclusively in the state or federal courts located in [COUNTY, STATE], and you consent to their jurisdiction. [OPTIONAL: replace with a binding individual arbitration clause after attorney review.]</li>
+        <li>Class-action waiver. To the extent permitted by law, you agree to bring claims only in your individual capacity and not as a plaintiff or class member in any class, collective, or representative proceeding.</li>
+        <li>Time limit. Any claim must be filed within one year after it arises, or it is permanently barred, to the extent the law allows.</li>
+        <li>Severability. If any provision is found unenforceable, it will be limited to the minimum extent necessary, and the rest of these Terms stay in effect.</li>
+        <li>Entire agreement. These Terms and the Privacy Policy are the entire agreement between you and us about the App. Our failure to enforce a provision is not a waiver of it.</li>
+        <li>Contact. Questions about these Terms: info@multiunity-app.com.</li>
       </ul>
     </section>
   </section>
@@ -1226,52 +1149,6 @@ html>body{padding:0}</style>
       root.querySelectorAll('[data-mu-domain]').forEach((button) => button.addEventListener('click', () => selectDomain(button.dataset.muDomain)));
       selectDomain('symptoms');
 
-      const architectureData = {
-        client: ['Mobile / web client', 'Capture entries locally first. Maintain a durable outbox so network failure never blocks a save.'],
-        sync: ['Sync queue', 'Send incremental creates, updates, and deletes with version checks, retries, and conflict handling.'],
-        api: ['Authenticated API', 'Authorize every request, validate domain schemas, isolate users, apply rate limits, and record audit events.'],
-        store: ['Encrypted data store', 'Keep versioned raw entries, consent and sharing state, derived summaries, and deletion/export records.'],
-        retrieval: ['Retrieval & summaries', 'Filter by user-approved dates, domains, and task. Return structured evidence with source entry IDs.'],
-        ai: ['AI orchestrator', 'Use provider adapters, bounded context, structured outputs, provenance, timeouts, evaluation, and cost controls.'],
-        brief: ['Appointment brief', 'Assemble user-approved facts, trends, uncertainties, questions, and source references into an editable export.']
-      };
-      const architectureDetail = root.querySelector('#muArchitectureDetail');
-      function selectArchitecture(name) {
-        root.querySelectorAll('[data-mu-arch]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.muArch === name)));
-        const [title, detail] = architectureData[name];
-        architectureDetail.innerHTML = `<h2>${title}</h2><p>${detail}</p>`;
-      }
-      root.querySelectorAll('[data-mu-arch]').forEach((button) => button.addEventListener('click', () => selectArchitecture(button.dataset.muArch)));
-      selectArchitecture('client');
-
-      const taskData = {
-        question: {
-          layers: ['User-selected preferences', 'Recent conversation window', 'Entries retrieved for the question', 'Relevant category summary', 'Safety and output contract'],
-          payload: { task: 'answer_reflection_question', dateRange: 'user selected', domains: ['relevant only'], maxEntries: 20, conversationTurns: 8, requireSourceIds: true }
-        },
-        summary: {
-          layers: ['Category schema and units', 'Entries since the previous summary', 'Previous versioned summary', 'Corrections made by the user', 'Summary output contract'],
-          payload: { task: 'update_category_summary', domain: 'one category', deltaOnly: true, retainPreviousVersion: true, requireSourceIds: true }
-        },
-        appointment: {
-          layers: ['Appointment purpose and clinician type', 'User-approved date range and categories', 'Current category summaries', 'Important changes and outliers', 'User-selected questions and exclusions'],
-          payload: { task: 'prepare_appointment_brief', editable: true, includeUncertainty: true, includeQuestions: true, requireSourceIds: true }
-        }
-      };
-      const contextLayers = root.querySelector('#muContextLayers');
-      const contextPayload = root.querySelector('#muContextPayload');
-      function selectTask(name) {
-        root.querySelectorAll('[data-mu-task]').forEach((button) => {
-          const selected = button.dataset.muTask === name;
-          button.setAttribute('aria-pressed', String(selected));
-          button.classList.toggle('btn-primary', selected);
-        });
-        contextLayers.innerHTML = taskData[name].layers.map((layer) => `<li>${layer}</li>`).join('');
-        contextPayload.textContent = JSON.stringify(taskData[name].payload, null, 2);
-      }
-      root.querySelectorAll('[data-mu-task]').forEach((button) => button.addEventListener('click', () => selectTask(button.dataset.muTask)));
-      selectTask('question');
-
       const businessData = {
         customer: ['Initial customer', 'Individuals and caregivers managing complex, chronic, or fluctuating health context. Later buyers may include families, clinics, coaches, patient-support organizations, and approved research institutions.'],
         value: ['Core value', 'Reduce recall burden and make appointments more productive through fast tracking, trustworthy synthesis, and an evidence-linked brief.'],
@@ -1294,15 +1171,6 @@ html>body{padding:0}</style>
       root.querySelectorAll('[data-mu-business]').forEach((button) => button.addEventListener('click', () => selectBusiness(button.dataset.muBusiness)));
       selectBusiness('customer');
 
-      function filterRoadmap(filter) {
-        root.querySelectorAll('[data-mu-roadmap]').forEach((button) => {
-          const selected = button.dataset.muRoadmap === filter;
-          button.setAttribute('aria-pressed', String(selected));
-          button.classList.toggle('btn-primary', selected);
-        });
-        root.querySelectorAll('[data-mu-phase]').forEach((stage) => { stage.hidden = filter !== 'all' && stage.dataset.muPhase !== filter; });
-      }
-      root.querySelectorAll('[data-mu-roadmap]').forEach((button) => button.addEventListener('click', () => filterRoadmap(button.dataset.muRoadmap)));
     })();
   </script>
 </div>
