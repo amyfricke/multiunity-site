@@ -91,7 +91,7 @@ You can do most of this yourself in the App, at any time and at no cost.
 - Delete everything: Settings → Delete account permanently removes your account and all of your data.
 - Withdraw consent: delete your account, or email us to stop AI processing. The App cannot run summaries or estimates without it.
 - Turn off reminders: Settings → Reminders.
-- Anything else: email info@multiunity-app.com.
+- Anything else: email support@multiunity-app.com.
 
 We respond to requests within 45 days, and tell you if we need up to 45 more. We will verify your identity using your account email first. If we deny a request, you can appeal by replying to our decision. We respond to appeals within 45 days, and you may contact your state attorney general if you disagree. We will not treat you differently for using any of these rights.
 
@@ -113,4 +113,4 @@ HIPAA. MultiUnity is a consumer app you use for yourself. It is not provided by 
 
 Changes. If we make a material change to this Policy, we will tell you in the App or by email before it takes effect. Where the change affects how we collect or share health data, we will ask for your consent again.
 
-Contact. MultiUnity, [info@multiunity-app.com](mailto:info@multiunity-app.com).
+Contact. MultiUnity, [support@multiunity-app.com](mailto:support@multiunity-app.com).
