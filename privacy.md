@@ -6,13 +6,13 @@ permalink: /privacy/
 
 **Draft pending legal review.** It describes how MultiUnity works today and may change before it takes effect.
 
-Draft dated October 22, 2026.
+Draft dated November 1, 2026.
 
 This Privacy Policy explains how MultiUnity ("we," "us") handles information in the MultiUnity app (the "App").
 
 ## Summary
 
-- What we collect: your account details and the health information you choose to record: symptoms, mood, food and drinks, medications and other interventions, vitals, observations, questionnaire answers, goals, and medical conditions.
+- What we collect: your account details and the health information you choose to record: symptoms, mood, food and drinks, medications and other treatments, vitals, observations, questionnaire answers, goals, and medical conditions, plus any Apple Health data you choose to share.
 - Why: to show your history, charts, summaries, nutrition estimates, reminders, and safety notices. Nothing else.
 - AI processing: entries needed for a summary or estimate are sent to our AI service providers to generate it, with your consent.
 - What we never do: sell your information, use it for advertising, or share it with data brokers.
@@ -23,13 +23,17 @@ This Privacy Policy explains how MultiUnity ("we," "us") handles information in 
 We collect only what you give us and what the App needs to work.
 
 - Account information: email address, username, first name, reason for joining, and password (stored only as a secure hash by our authentication provider). From you, at sign-up.
-- Health information you record: symptom ratings and notes, mood ratings, food and drink entries, medications, supplements and other interventions with doses and times, vitals, bowel movements, observations, PHQ-9 and GAD-7 answers and scores, and goals. From you, when you make an entry.
+- Health information you record: symptom ratings and notes, mood ratings, food and drink entries, medications, supplements and other treatments with doses and times, vitals, bowel movements, observations, PHQ-9 and GAD-7 answers and scores, and goals. From you, when you make an entry.
+- Apple Health data you choose to share (iPhone only): daily totals for the types you tick on the Apple Health screen, such as steps, exercise minutes, active energy, workouts, sleep and sleep stages, and menstrual flow. From Apple Health, with your permission. The App only reads it and never changes it.
 - Personal details: gender at birth, date of birth, gender identity, medical conditions, and optional demographics. From you, in Personal details (optional).
 - Information the App derives: nutrition estimates, daily nutrition totals, summaries and keywords, suggested symptoms, and chart data. Generated from your entries.
+- ChatGuide conversations: the questions you ask ChatGuide and its answers, saved to your account so you can reopen and continue them.
 - Consent and settings: which consents you gave and when, and your reminder and display settings.
 - Technical information: sign-in session tokens, and request counts used for rate limits.
 
-What we do not collect: your location, contacts, photos, advertising identifiers, or browsing activity outside the App. The App does not currently use third-party analytics or advertising tools.
+What we do not collect: your location, contacts, photo library, advertising identifiers, or browsing activity outside the App. The App does not currently use third-party analytics or advertising tools.
+
+Food photos: when you take or choose a photo in a food entry, that one photo is sent to our AI provider to list the foods it shows, and the list is filled into the entry for you to check. We do not store the photo, and the App cannot see the rest of your photo library.
 
 Voice dictation: when you tap a microphone, your speech is converted to text by your device's speech recognition (on the device where supported, otherwise by Apple's or Google's speech service under their terms). We receive only the resulting text, and only if you save it.
 
@@ -52,7 +56,7 @@ We do not use your information for advertising, marketing profiles, or to train 
 The App uses a small number of service providers that process information only on our instructions. AI processing happens only after you consent to it.
 
 - Supabase hosts your account, database, and the App's server functions. It holds all of the information in section 1, encrypted in transit and at rest.
-- Anthropic (Claude) generates summaries, keywords, nutrition estimates, and suggested symptoms to track, and may look up product nutrition labels on the web. It receives the entries needed for that summary or estimate, your stated goals, gender at birth, and medical conditions. Not your name or email.
+- Anthropic (Claude) generates summaries, keywords, nutrition estimates, and suggested symptoms to track, and may look up product nutrition labels on the web. It receives the entries needed for that summary or estimate, your stated goals, gender at birth, and medical conditions, and any food photo you choose to describe. Not your name or email. Not your Apple Health data.
 - USDA FoodData Central is a public food nutrition database. It receives food names only (for example "chia seeds"), with nothing that identifies you.
 - Apple and Google deliver push notifications and, where used, speech recognition. They receive notification content (generic text) and dictated audio, under their own terms.
 
@@ -73,13 +77,13 @@ This notice is for residents of Washington (My Health My Data Act), Nevada (SB 3
 
 - Categories collected: the health information, personal details, and derived information in section 1.
 - Purposes: only those in section 2. We collect and share consumer health data only with your consent, or as strictly necessary to provide the App you asked for.
-- Sources: you, and information the App generates from your entries.
+- Sources: you, Apple Health (only the types you choose to share), and information the App generates from your entries.
 - Shared with: the service providers in section 3 (processors), under contracts limiting their use to providing the App. We do not share it with any other third party, affiliate, or data broker.
 - No sale: we never sell consumer health data. Any sale would require your separate, signed authorization.
 - Geofencing: we do not use geofences around health care facilities.
 - Your rights: to confirm whether we collect your consumer health data, to access it and see the list of everyone we shared it with, to withdraw consent, and to have it deleted. See section 6.
 
-We ask for your consent on a separate screen the first time you sign in, before you record anything. Collection consent and AI-processing consent are separate choices.
+We ask for your consent when you create your account, before you record anything, and again on a separate screen whenever this consent changes. Agreeing to the Terms of Use and Privacy Policy, collection consent, and AI-processing consent are separate choices.
 
 ## 6. Your choices and rights
 
@@ -88,6 +92,8 @@ You can do most of this yourself in the App, at any time and at no cost.
 - Access and export: Settings → Download data backup gives you a copy of your entries.
 - Correct: edit your personal details and goals in the App, or delete an entry and record it again.
 - Delete an entry: Entries by date → the trash button, for any date.
+- Delete a conversation: ChatGuide → Past conversations → the trash button.
+- Stop sharing Apple Health data: Settings → Apple Health → untick the types and Save. The imported data for those types is removed. You can also turn off access in the Health app.
 - Delete everything: Settings → Delete account permanently removes your account and all of your data.
 - Withdraw consent: delete your account, or email us to stop AI processing. The App cannot run summaries or estimates without it.
 - Turn off reminders: Settings → Reminders.
