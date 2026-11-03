@@ -24,7 +24,7 @@ We collect only what you give us and what the App needs to work.
 
 - Account information: email address, first name, reason for joining, and password (stored only as a secure hash by our authentication provider). From you, at sign-up.
 - Health information you record: symptom ratings and notes, mood ratings, food and drink entries, medications, supplements and other treatments with doses and times, vitals, bowel movements, observations, PHQ-9 and GAD-7 answers and scores, and goals. From you, when you make an entry.
-- Apple Health data you choose to share (iPhone only): daily totals for the types you tick on the Apple Health screen, such as steps, exercise minutes, active energy, workouts, sleep and sleep stages, and menstrual flow. From Apple Health, with your permission. The App only reads it and never changes it.
+- Apple Health data you choose to share (iPhone only): daily totals for the types you tick on the Apple Health screen, such as steps, exercise minutes, active energy, workouts, heart rate, resting heart rate, heart rate variability, sleep and sleep stages, and menstrual flow. From Apple Health, with your permission. The App only reads it and never changes it.
 - Personal details: gender at birth, date of birth, medical conditions, and optional demographics. From you, in Personal details (optional).
 - Information the App derives: nutrition estimates, daily nutrition totals, summaries and keywords, suggested symptoms, and chart data. Generated from your entries.
 - ChatGuide conversations: the questions you ask ChatGuide and its answers, saved to your account so you can reopen and continue them.
