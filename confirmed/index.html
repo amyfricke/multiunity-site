@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<title>Email confirmed · MultiUnity</title>
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-dark-48.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon-dark.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600&family=Fira+Sans:ital,wght@1,500;1,600&display=swap">
+<!--
+  Where the MultiUnity sign-up confirmation email sends people. Supabase adds
+  sign-in tokens, or an error, after "#"; that part never reaches this server.
+  The script reads only whether there is an error, then clears the address.
+  Colors and type follow the app (src/mvp/ui/theme.js) and the home page.
+-->
+<style>
+  /* The app's dark palette by default; its light palette in light mode. */
+  :root {
+    color-scheme: dark light;
+    --charcoal: #383838;
+    --charcoal-deep: #2E2D2D;
+    --cream: #EEF3D8;
+    --text: #FFFFFF;
+    --muted: #D9D9D9;
+    --coral: #CE6363;
+    --aqua: #8CE4CF;
+    --button: #FFFFFF;
+    --button-text: #415658;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --charcoal: #FCFFF1;
+      --charcoal-deep: #FFFFFF;
+      --cream: #202020;
+      --text: #415658;
+      --muted: #687274;
+      --coral: #A01B23;
+      --aqua: #415658;
+      --button: #415658;
+      --button-text: #FFFFFF;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--charcoal-deep);
+    color: var(--text);
+    font-family: "Comfortaa", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  main { max-width: 34rem; margin: 0 auto; padding: 2rem 16px 3rem; }
+  .bar { height: 0.35rem; border-radius: 999px; background: linear-gradient(90deg, var(--coral), var(--cream), var(--aqua)); }
+  .brand { display: flex; align-items: center; gap: 0.75rem; margin: 1.5rem 0 1.25rem; text-decoration: none; }
+  .brand img { width: 52px; height: 52px; border-radius: 12px; }
+  .wordmark { font-weight: 500; font-size: 1.5rem; letter-spacing: 0.04em; }
+  .wordmark .multi { color: var(--coral); }
+  .wordmark .unity { color: var(--aqua); }
+  .card {
+    background: var(--charcoal);
+    border: 3px solid var(--aqua);
+    border-radius: 18px;
+    padding: 1.5rem 1.25rem;
+  }
+  h1 {
+    margin: 0 0 0.75rem;
+    font-family: "Fira Sans", sans-serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 2.1rem;
+    line-height: 1.15;
+    color: var(--cream);
+  }
+  h1 .accent { color: var(--coral); }
+  p { margin: 0 0 1rem; }
+  .button {
+    display: inline-block;
+    margin: 0.5rem 0 1.25rem;
+    padding: 0.55rem 1.4rem;
+    border: 3px solid var(--cream);
+    border-radius: 8px;
+    background: var(--button);
+    color: var(--button-text);
+    font-family: "Fira Sans", sans-serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.25rem;
+    text-decoration: none;
+  }
+  .note { color: var(--muted); font-size: 0.95rem; }
+  a { color: var(--aqua); }
+  footer { margin-top: 1.5rem; color: var(--muted); font-size: 0.9rem; text-align: center; }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <div class="bar" aria-hidden="true"></div>
+  <a class="brand" href="/">
+    <img src="/apple-touch-icon-dark.png" width="52" height="52" alt="">
+    <span class="wordmark" aria-label="MultiUnity"><span class="multi">Multi</span><span class="unity">Unity</span></span>
+  </a>
+  <section class="card">
+    <div id="confirmed-ok">
+      <h1>Email <span class="accent">confirmed.</span></h1>
+      <p>Your MultiUnity account is ready. Open the app and sign in with your email and password.</p>
+    </div>
+    <div id="confirmed-error" hidden>
+      <h1>This link has <span class="accent">expired.</span></h1>
+      <p>It may already have been used. If you confirmed your email before, open MultiUnity and sign in. If not, sign up again in the app to get a new link.</p>
+    </div>
+    <a class="button" href="multiunity://">Open MultiUnity</a>
+    <p class="note">If the button does nothing, open MultiUnity from your home screen. On a computer, open the app on your iPhone instead.</p>
+    <p class="note">Don’t have the app yet? <a href="https://testflight.apple.com/join/KwwbkYwu">Join the iPhone beta on TestFlight</a>.</p>
+  </section>
+  <footer>
+    <a href="/">multiunity-app.com</a> · <a href="mailto:support@multiunity-app.com">support@multiunity-app.com</a> · <a href="/privacy/">Privacy Policy</a>
+  </footer>
+</main>
+<script>
+  (function () {
+    var params = new URLSearchParams(location.hash.slice(1) || location.search.slice(1));
+    if (params.get('error') || params.get('error_code')) {
+      document.getElementById('confirmed-ok').hidden = true;
+      document.getElementById('confirmed-error').hidden = false;
+    }
+    // Drop the tokens Supabase appended so they are not left in history.
+    if (location.hash || location.search) history.replaceState(null, '', location.pathname);
+  })();
+</script>
+</body>
+</html>
