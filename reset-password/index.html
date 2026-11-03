@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<title>Reset password · MultiUnity</title>
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-dark-48.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon-dark.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600&family=Fira+Sans:ital,wght@1,500;1,600&display=swap">
+<!--
+  Where the MultiUnity password-reset email sends people. Supabase adds a
+  short-lived recovery session after "#" (or ?code=); the Supabase client reads
+  it, the person sets a new password, and the page signs out again. The URL
+  and anon key are the public ones the app ships with; the database's
+  row-level security is what protects data. Styled like confirmed/index.html.
+-->
+<style>
+  /* The app's dark palette by default; its light palette in light mode. */
+  :root {
+    color-scheme: dark light;
+    --charcoal: #383838;
+    --charcoal-deep: #2E2D2D;
+    --cream: #EEF3D8;
+    --text: #FFFFFF;
+    --muted: #D9D9D9;
+    --coral: #CE6363;
+    --aqua: #8CE4CF;
+    --button: #FFFFFF;
+    --button-text: #415658;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --charcoal: #FCFFF1;
+      --charcoal-deep: #FFFFFF;
+      --cream: #202020;
+      --text: #415658;
+      --muted: #687274;
+      --coral: #A01B23;
+      --aqua: #415658;
+      --button: #415658;
+      --button-text: #FFFFFF;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--charcoal-deep);
+    color: var(--text);
+    font-family: "Comfortaa", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  main { max-width: 34rem; margin: 0 auto; padding: 2rem 16px 3rem; }
+  .bar { height: 0.35rem; border-radius: 999px; background: linear-gradient(90deg, var(--coral), var(--cream), var(--aqua)); }
+  .brand { display: flex; align-items: center; gap: 0.75rem; margin: 1.5rem 0 1.25rem; text-decoration: none; }
+  .brand img { width: 52px; height: 52px; border-radius: 12px; }
+  .wordmark { font-weight: 500; font-size: 1.5rem; letter-spacing: 0.04em; }
+  .wordmark .multi { color: var(--coral); }
+  .wordmark .unity { color: var(--aqua); }
+  .card {
+    background: var(--charcoal);
+    border: 3px solid var(--aqua);
+    border-radius: 18px;
+    padding: 1.5rem 1.25rem;
+  }
+  h1 {
+    margin: 0 0 0.75rem;
+    font-family: "Fira Sans", sans-serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 2.1rem;
+    line-height: 1.15;
+    color: var(--cream);
+  }
+  h1 .accent { color: var(--coral); }
+  p { margin: 0 0 1rem; }
+  .button {
+    display: inline-block;
+    margin: 0.5rem 0 1.25rem;
+    padding: 0.55rem 1.4rem;
+    border: 3px solid var(--cream);
+    border-radius: 8px;
+    background: var(--button);
+    color: var(--button-text);
+    font-family: "Fira Sans", sans-serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.25rem;
+    text-decoration: none;
+  }
+  .note { color: var(--muted); font-size: 0.95rem; }
+  a { color: var(--aqua); }
+  label { display: block; margin: 0 0 0.35rem; font-weight: 600; color: var(--aqua); }
+  input[type=password] {
+    width: 100%;
+    margin: 0 0 1rem;
+    padding: 0.6rem 0.75rem;
+    border: 3px solid var(--aqua);
+    border-radius: 8px;
+    background: var(--charcoal-deep);
+    color: var(--text);
+    font: inherit;
+  }
+  button.button { cursor: pointer; }
+  button.button:disabled { opacity: 0.5; cursor: default; }
+  .rules { margin: -0.5rem 0 1rem; color: var(--coral); font-size: 0.9rem; white-space: pre-line; }
+  .rules:empty { display: none; }
+  footer { margin-top: 1.5rem; color: var(--muted); font-size: 0.9rem; text-align: center; }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <div class="bar" aria-hidden="true"></div>
+  <a class="brand" href="/">
+    <img src="/apple-touch-icon-dark.png" width="52" height="52" alt="">
+    <span class="wordmark" aria-label="MultiUnity"><span class="multi">Multi</span><span class="unity">Unity</span></span>
+  </a>
+  <section class="card">
+    <div id="state-loading">
+      <h1>Reset <span class="accent">password.</span></h1>
+      <p>Checking your reset link…</p>
+    </div>
+    <form id="state-form" hidden>
+      <h1>Choose a new <span class="accent">password.</span></h1>
+      <label for="password">New password</label>
+      <input id="password" type="password" autocomplete="new-password" required>
+      <label for="retype">Retype new password</label>
+      <input id="retype" type="password" autocomplete="new-password" required>
+      <p class="rules" id="rules" aria-live="polite"></p>
+      <button class="button" type="submit" id="save" disabled>Save new password</button>
+    </form>
+    <div id="state-done" hidden>
+      <h1>Password <span class="accent">changed.</span></h1>
+      <p>Open MultiUnity and sign in with your email and your new password.</p>
+      <a class="button" href="multiunity://">Open MultiUnity</a>
+      <p class="note">If the button does nothing, open MultiUnity from your home screen.</p>
+    </div>
+    <div id="state-error" hidden>
+      <h1>This link has <span class="accent">expired.</span></h1>
+      <p id="error-text">It may already have been used. In MultiUnity, tap Forgot Password? on the sign-in screen to get a new link.</p>
+      <a class="button" href="multiunity://">Open MultiUnity</a>
+    </div>
+  </section>
+  <footer>
+    <a href="/">multiunity-app.com</a> · <a href="mailto:support@multiunity-app.com">support@multiunity-app.com</a> · <a href="/privacy/">Privacy Policy</a>
+  </footer>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.111.0/dist/umd/supabase.js"></script>
+<script>
+  (function () {
+    var show = function (id) {
+      ['state-loading', 'state-form', 'state-done', 'state-error'].forEach(function (name) {
+        document.getElementById(name).hidden = name !== id;
+      });
+    };
+    var params = new URLSearchParams(location.hash.slice(1) || location.search.slice(1));
+    if (params.get('error') || params.get('error_code') || !window.supabase) {
+      history.replaceState(null, '', location.pathname);
+      show('state-error');
+      return;
+    }
+    // Session only for this tab, so nothing stays signed in on this site.
+    var client = window.supabase.createClient('https://slqerqlyttejkxxxayjd.supabase.co', 'sb_publishable_32RE1wo537tq068s7mXpFA_DBRe4o1t', {
+      auth: { detectSessionInUrl: true, persistSession: true, storage: window.sessionStorage, autoRefreshToken: false },
+    });
+    var ready = false;
+    var open = function () {
+      if (ready) return;
+      ready = true;
+      history.replaceState(null, '', location.pathname);
+      show('state-form');
+    };
+    client.auth.onAuthStateChange(function (event, session) {
+      if (session && (event === 'PASSWORD_RECOVERY' || event === 'SIGNED_IN' || event === 'INITIAL_SESSION')) open();
+    });
+    client.auth.getSession().then(function (result) {
+      if (result.data && result.data.session) open();
+      else setTimeout(function () { if (!ready) show('state-error'); }, 4000);
+    });
+
+    // The app's sign-up password rules.
+    var password = document.getElementById('password');
+    var retype = document.getElementById('retype');
+    var rules = document.getElementById('rules');
+    var save = document.getElementById('save');
+    var check = function () {
+      var value = password.value;
+      var unmet = [
+        [value.length >= 8, 'Must be at least 8 characters'],
+        [/\d/.test(value), 'Must contain one number'],
+        [/[A-Z]/.test(value), 'Must contain one capital letter'],
+        [/[a-z]/.test(value), 'Must contain one lower case letter'],
+        [/[^A-Za-z0-9\s]/.test(value), 'Must contain one special character'],
+      ].filter(function (rule) { return !rule[0]; }).map(function (rule) { return rule[1]; });
+      if (retype.value && value !== retype.value) unmet.push('Passwords must match');
+      rules.textContent = value || retype.value ? unmet.join('\n') : '';
+      save.disabled = !value || unmet.length > 0 || value !== retype.value;
+    };
+    password.addEventListener('input', check);
+    retype.addEventListener('input', check);
+    document.getElementById('state-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      save.disabled = true;
+      save.textContent = 'Saving…';
+      client.auth.updateUser({ password: password.value }).then(function (result) {
+        if (result.error) {
+          rules.textContent = result.error.message || 'Your password could not be changed. Try again.';
+          save.textContent = 'Save new password';
+          save.disabled = false;
+          return;
+        }
+        password.value = '';
+        retype.value = '';
+        client.auth.signOut();
+        show('state-done');
+      });
+    });
+  })();
+</script>
+</body>
+</html>
